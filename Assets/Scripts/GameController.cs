@@ -14,6 +14,9 @@ public class GameController : MonoBehaviour {
     public float moneyMax = 100;
 
     public float moralLossPerTick = 0.005f;
+    public float EnergyConsumption;
+
+    public float energyAwareness;
     // Use this for initialization
     void Start () {
         energy = energyMax;

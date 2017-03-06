@@ -11,9 +11,7 @@ public class HUDController : MonoBehaviour {
     public Transform globalMoneyPanel;
     
     bool barsUpdateTime = true;
-
-    public Transform energyPanel;
-    public Transform moneyPanel;
+    
     public Transform moralPanelFm1;
     public Transform moralPanelFm2;
     public Transform moralPanelFm3;
@@ -56,8 +54,8 @@ public class HUDController : MonoBehaviour {
 
     void BarsUpdate()
     {
-        BarUpdate(energyPanel, gameController.energy, gameController.energyMax);
-        BarUpdate(moneyPanel, gameController.money, gameController.moneyMax);
+        BarUpdate(globalEnergyPanel, gameController.energy, gameController.energyMax);
+        BarUpdate(globalMoneyPanel, gameController.money, gameController.moneyMax);
         BarUpdate(moralPanelFm1, fm1.moral, 100);
         BarUpdate(moralPanelFm2, fm2.moral, 100);
         BarUpdate(moralPanelFm3, fm3.moral, 100);
