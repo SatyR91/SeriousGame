@@ -4,9 +4,12 @@ using System.Collections;
 
 public class StatePattern: MonoBehaviour
 {
-    public Transform deviceToUse;
+    public Transform activityToMake;
     public Transform bed;
     public Transform outside;
+    public Activity[] preferences;
+    public Activity refusedActivity;
+    public int timesRefused;
 
     [HideInInspector]
     public float curTime;
@@ -24,8 +27,6 @@ public class StatePattern: MonoBehaviour
     public GoUseState goUseState;
     [HideInInspector]
     public UseState useState;
-    
-
 
     public NavMeshAgent navMeshAgent;
 
@@ -39,6 +40,20 @@ public class StatePattern: MonoBehaviour
         useState = new UseState(this);
 
         navMeshAgent = GetComponent<NavMeshAgent>();
+    }
+
+    public void ChooseActivity()
+    {
+        int i = 0;
+        activityToMake = null;
+        while (i < preferences.Length && activityToMake == null)
+        {
+            if (!preferences[i].used && preferences[i] != refusedActivity)
+            {
+                activityToMake = preferences[i].transform ;
+            }
+            i += 1;
+        }
     }
 
     // Use this for initialization

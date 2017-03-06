@@ -41,9 +41,9 @@ public class GoUseState : IState
 
     public void GoUse()
     {
-        guy.GetComponent<NavMeshAgent>().destination = guy.deviceToUse.position;
+        guy.GetComponent<NavMeshAgent>().destination = guy.activityToMake.position;
         guy.GetComponent<NavMeshAgent>().Resume();
-        if (Vector3.Distance(guy.deviceToUse.position, guy.transform.position) < 1)
+        if (Vector3.Distance(guy.activityToMake.position, guy.transform.position) < 1)
         {
             guy.GetComponent<NavMeshAgent>().Stop();
             guy.curTime = Time.time;
