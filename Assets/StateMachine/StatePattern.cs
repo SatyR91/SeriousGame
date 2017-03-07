@@ -2,43 +2,43 @@
 using UnityEngine.AI;
 using System.Collections;
 
-public class StatePattern: MonoBehaviour
+public class StatePattern : MonoBehaviour
 {
-    public Transform activityToMake;
+    public Activity activityToMake;
     public Transform bed;
     public Transform outside;
     public Activity[] preferences;
     public Activity refusedActivity;
     public int timesRefused;
+    public float wanderOff;
+    public Transform[] wanderpoints;
 
     [HideInInspector]
     public float curTime;
     [HideInInspector]
     public IState currentState;
     [HideInInspector]
-    public GoSleepState goSleepState;
-    [HideInInspector]
     public SleepState sleepState;
-    [HideInInspector]
-    public GoOutState goOutState;
     [HideInInspector]
     public OutState outState;
     [HideInInspector]
     public GoUseState goUseState;
     [HideInInspector]
     public UseState useState;
-
+    [HideInInspector]
+    public WanderState wanderState;
+    [HideInInspector]
     public NavMeshAgent navMeshAgent;
 
     private void Awake()
     {
-        goSleepState = new GoSleepState(this);
         sleepState = new SleepState(this);
-        goOutState = new GoOutState(this);
         outState = new OutState(this);
         goUseState = new GoUseState(this);
         useState = new UseState(this);
+        wanderState = new WanderState(this);
 
+        timesRefused = 0;
         navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
@@ -48,9 +48,10 @@ public class StatePattern: MonoBehaviour
         activityToMake = null;
         while (i < preferences.Length && activityToMake == null)
         {
-            if (!preferences[i].used && preferences[i] != refusedActivity)
+            if (!preferences[i].device.used && preferences[i] != refusedActivity)
             {
-                activityToMake = preferences[i].transform ;
+                activityToMake = preferences[i];
+                activityToMake.device.used = true;
             }
             i += 1;
         }
@@ -59,12 +60,52 @@ public class StatePattern: MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        currentState = goOutState;
+        currentState = outState;
     }
 
     // Update is called once per frame
     void Update()
     {
         currentState.UpdateState();
+    }
+
+    // Functions used in several States
+
+    public void Clear()
+    {
+        timesRefused = 0;
+        refusedActivity = null;
+        activityToMake.device.used = false;
+        activityToMake = null;
+    }
+
+    public void ItsTime()
+    {
+        if (Time.time >= 8000)
+        {
+            Clear();
+            currentState = sleepState;
+        }
+        if (Time.time >= 16000)
+        {
+            Clear();
+            currentState = outState;
+        }
+    }
+
+    public void ChangeActivity()
+    {
+        if (timesRefused < 2 && (currentState == useState || currentState == goUseState))
+        {
+            refusedActivity = activityToMake;
+            timesRefused += 1;
+            activityToMake.device.used = false;
+            activityToMake = null;
+            currentState = wanderState;
+        }
+        else
+        {
+            Debug.Log("go fuck yourself");
+        }
     }
 }

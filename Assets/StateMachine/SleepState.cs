@@ -8,6 +8,7 @@ public class SleepState : IState
 
 {
     private readonly StatePattern guy;
+    private bool arrived = false;
 
     public SleepState(StatePattern statePatternGuy)
     {
@@ -16,34 +17,49 @@ public class SleepState : IState
 
     public void UpdateState()
     {
-        Sleep();
+        if (arrived)
+        {
+            Sleep();
+        }
+        else
+        {
+            GoSleep();
+        }
     }
 
-    public void ToGoSleepState()
-    { }
-
-    public void ToSleepState()
-    { }
-
-    public void ToGoOutState()
-    { }
-
-    public void ToOutState()
-    { }
+    //Change state functions
 
     public void ToGoUseState()
-    {
-        guy.currentState = guy.goUseState;
-    }
+    { }
 
     public void ToUseState()
     { }
+
+    public void ToWanderState()
+    {
+        guy.currentState = guy.wanderState;
+    }
+
+    //State - Functions
+
+    public void GoSleep()
+    {
+        guy.GetComponent<NavMeshAgent>().destination = guy.bed.position;
+        guy.GetComponent<NavMeshAgent>().Resume();
+        if (Vector3.Distance(guy.bed.position, guy.transform.position) < 1)
+        {
+            guy.GetComponent<NavMeshAgent>().Stop();
+            guy.curTime = Time.time;
+            arrived = true;
+        }
+    }
 
     public void Sleep()
     {
         if (Time.time - guy.curTime >= 2)
         {
-            ToGoUseState();
+            arrived = false;
+            ToWanderState();
         }
     }
 }
