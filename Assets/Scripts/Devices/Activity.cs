@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Activity : MonoBehaviour {
     public int id;
-    public string deviceName;
-    public bool used;
-    public bool on;
+    public string activityName;
     public float moralGain;
+    public float timeOfExec;
+    public Device device;
 }

@@ -6,16 +6,10 @@ public interface IState
 
     void UpdateState();
 
-    void ToGoSleepState();
-
-    void ToSleepState();
-
-    void ToGoOutState();
-
-    void ToOutState();
-
     void ToGoUseState();
 
     void ToUseState();
+
+    void ToWanderState();
 
 }

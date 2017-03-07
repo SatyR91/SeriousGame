@@ -8,6 +8,7 @@ public class OutState : IState
 
 {
     private readonly StatePattern guy;
+    private bool arrived = false;
 
     public OutState(StatePattern statePatternGuy)
     {
@@ -16,34 +17,49 @@ public class OutState : IState
 
     public void UpdateState()
     {
-        Out();
+        if (arrived)
+        {
+            Out();
+        }
+        else
+        {
+            GoOut();
+        }
     }
 
-    public void ToGoSleepState()
-    { }
-
-    public void ToSleepState()
-    { }
-
-    public void ToGoOutState()
-    { }
-
-    public void ToOutState()
-    { }
+    //Change state functions
 
     public void ToGoUseState()
-    {
-        guy.currentState = guy.goUseState;
-    }
+    { }
 
     public void ToUseState()
     { }
+
+    public void ToWanderState()
+    {
+        guy.currentState = guy.wanderState;
+    }
+
+    //State - Functions
+
+    public void GoOut()
+    {
+        guy.GetComponent<NavMeshAgent>().destination = guy.outside.position;
+        guy.GetComponent<NavMeshAgent>().Resume();
+        if (Vector3.Distance(guy.outside.position, guy.transform.position) < 1)
+        {
+            guy.GetComponent<NavMeshAgent>().Stop();
+            guy.curTime = Time.time;
+            arrived = true;
+        }
+    }
 
     public void Out()
     {
         if (Time.time - guy.curTime >= 2)
         {
-            ToGoUseState();
+            arrived = false;
+            ToWanderState();
         }
     }
 }
