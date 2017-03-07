@@ -7,23 +7,25 @@ public class DigitalGameTimeClock : MonoBehaviour
 {
 
     float nextSecond = 12.5f/60f;
-    int second;
+    
     float minute = 0.0f;
     float hour = 0.0f;
     float day = 0.0f;
     float month = 0.0f;
     float year = 0.0f;
 
+    public float currentTime;
 
     // Use this for initialization
     void Start()
     {
-
+        currentTime = hour * 60f + minute;
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         if (nextSecond > 0)
         {
             nextSecond -= Time.deltaTime;
@@ -66,6 +68,7 @@ public class DigitalGameTimeClock : MonoBehaviour
         }
 
         GetComponent<TextMesh>().text =  String.Format("{0:00}:{1:00}", hour,minute);
-
+        currentTime = hour * 60f + minute;
+        Debug.Log(currentTime + " minutes écoulées.");
     }
 }
