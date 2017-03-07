@@ -16,20 +16,11 @@ public class GoUseState : IState
 
     public void UpdateState()
     {
+        guy.ItsTime();
         GoUse();
     }
 
-    public void ToGoSleepState()
-    { }
-
-    public void ToSleepState()
-    { }
-
-    public void ToGoOutState()
-    { }
-
-    public void ToOutState()
-    { }
+    //Change state functions
 
     public void ToGoUseState()
     { }
@@ -39,12 +30,18 @@ public class GoUseState : IState
         guy.currentState = guy.useState;
     }
 
+    public void ToWanderState()
+    { }
+
+    //State - Functions
+
     public void GoUse()
     {
-        guy.GetComponent<NavMeshAgent>().destination = guy.activityToMake.position;
+        guy.GetComponent<NavMeshAgent>().destination = guy.activityToMake.device.transform.position;
         guy.GetComponent<NavMeshAgent>().Resume();
-        if (Vector3.Distance(guy.activityToMake.position, guy.transform.position) < 1)
+        if (Vector3.Distance(guy.activityToMake.device.transform.position, guy.transform.position) < 1)
         {
+            guy.activityToMake.device.used = true;
             guy.GetComponent<NavMeshAgent>().Stop();
             guy.curTime = Time.time;
             ToUseState();

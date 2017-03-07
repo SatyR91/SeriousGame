@@ -4,12 +4,12 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 
-public class UseState : IState
+public class WanderState : IState
 
 {
     private readonly StatePattern guy;
 
-    public UseState(StatePattern statePatternGuy)
+    public WanderState(StatePattern statePatternGuy)
     {
         guy = statePatternGuy;
     }
@@ -17,30 +17,26 @@ public class UseState : IState
     public void UpdateState()
     {
         guy.ItsTime();
-        Use();
+        Wander();
     }
 
     //Change state functions
 
     public void ToGoUseState()
-    { }
+    {
+        guy.currentState = guy.goUseState;
+    }
 
     public void ToUseState()
     { }
 
     public void ToWanderState()
-    {
-        guy.currentState = guy.wanderState;
-    }
+    { }
 
     //State - Functions
 
-    public void Use()
+    public void Wander()
     {
-        if (Time.time >= guy.curTime + guy.activityToMake.timeOfExec)
-        {
-            guy.Clear();
-            ToWanderState();
-        }
+
     }
 }
