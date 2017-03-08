@@ -69,6 +69,5 @@ public class DigitalGameTimeClock : MonoBehaviour
 
         GetComponent<TextMesh>().text =  String.Format("{0:00}:{1:00}", hour,minute);
         currentTime = hour * 60f + minute;
-        Debug.Log(currentTime + " minutes écoulées.");
     }
 }
