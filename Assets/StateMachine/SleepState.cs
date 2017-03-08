@@ -7,43 +7,49 @@ using System.Collections.Generic;
 public class SleepState : IState
 
 {
-    private readonly StatePattern guy;
+    private readonly StatePattern fm;
+    private bool arrived = false;
 
     public SleepState(StatePattern statePatternGuy)
     {
-        guy = statePatternGuy;
+        fm = statePatternGuy;
     }
 
     public void UpdateState()
     {
-        Sleep();
+        if (arrived)
+        {
+            Sleep();
+        }
+        else
+        {
+            GoSleep();
+        }
     }
 
-    public void ToGoSleepState()
-    { }
+    //State - Functions
 
-    public void ToSleepState()
-    { }
-
-    public void ToGoOutState()
-    { }
-
-    public void ToOutState()
-    { }
-
-    public void ToGoUseState()
+    public void GoSleep()
     {
-        guy.currentState = guy.goUseState;
+        if (Vector3.Distance(fm.bed.position, fm.transform.position) < 1)
+        {
+            fm.GetComponent<NavMeshAgent>().Stop();
+            fm.curTime = Time.time;
+            arrived = true;
+        }
+        else
+        {
+            fm.GetComponent<NavMeshAgent>().destination = fm.bed.position;
+            fm.GetComponent<NavMeshAgent>().Resume();
+        }
     }
-
-    public void ToUseState()
-    { }
 
     public void Sleep()
     {
-        if (Time.time - guy.curTime >= 2)
+        if (Time.time - fm.curTime >= 2)
         {
-            ToGoUseState();
+            arrived = false;
+            fm.ToWanderState();
         }
     }
 }
