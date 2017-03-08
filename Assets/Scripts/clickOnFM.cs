@@ -17,7 +17,6 @@ public class clickOnFM : MonoBehaviour
                 {
                     GameObject fmHit = hit.collider.gameObject;
                     SendCancelMessage(fmHit);
-                    Debug.Log("Les Seufs");
                 }
             }
         }

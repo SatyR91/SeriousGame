@@ -77,7 +77,6 @@ public class WanderState : IState
 
     public void ActiveWander()
     {
-        Debug.Log("wander");
         fm.GetComponent<NavMeshAgent>().destination = fm.wanderpoints[nextWanderPoint].position;
         fm.GetComponent<NavMeshAgent>().Resume();
         if (Vector3.Distance(fm.wanderpoints[nextWanderPoint].position, fm.transform.position) < 1)
