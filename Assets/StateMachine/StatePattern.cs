@@ -14,7 +14,7 @@ public class StatePattern : MonoBehaviour
     public float wanderTime;
     public float wanderTick;
     public Transform[] wanderpoints;
-    
+
 
     [HideInInspector]
     public float curTime;
@@ -38,11 +38,11 @@ public class StatePattern : MonoBehaviour
         useState = new UseState(this);
         wanderState = new WanderState(this);
 
-        timesRefused = 0;
+        timesRefused = 1;
         navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
-   
+
 
     // Use this for initialization
     void Start()
@@ -60,37 +60,40 @@ public class StatePattern : MonoBehaviour
 
     public void Clear()
     {
-        timesRefused = 0;
+        timesRefused = 1;
         refusedActivity = null;
-        activityToMake.device.used = false;
+        if (activityToMake != null)
+        {
+            activityToMake.device.used = false;
+            activityToMake.device.on = false;
+        }
         activityToMake = null;
         useState.arrived = false;
     }
 
     public void ItsTime()
     {
-        if (Time.time >= 8000)
+        if (Time.time >= 30 && Time.time <= 31)
         {
-            Clear();
             currentState = sleepState;
         }
-        if (Time.time >= 16000)
+        if (Time.time >= 10 && Time.time <= 11)
         {
-            Clear();
             currentState = outState;
         }
     }
 
     public void ChangeActivity()
     {
-        if (timesRefused < 2 && currentState == useState )
+        if (timesRefused < 2 && currentState == useState)
         {
-            if (timesRefused ==0)
+            if (timesRefused == 1)
             {
                 refusedActivity = activityToMake;
             }
             timesRefused += 1;
             activityToMake.device.used = false;
+            activityToMake.device.on = false;
             activityToMake = null;
             useState.arrived = false;
             wanderTime = Time.time;

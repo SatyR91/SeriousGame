@@ -9,6 +9,7 @@ public class SleepState : IState
 {
     private readonly StatePattern fm;
     private bool arrived = false;
+    private bool cleared = false;
 
     public SleepState(StatePattern statePatternGuy)
     {
@@ -17,6 +18,11 @@ public class SleepState : IState
 
     public void UpdateState()
     {
+        if(!cleared)
+        {
+            fm.Clear();
+            cleared = true;
+        }
         if (arrived)
         {
             Sleep();
@@ -49,6 +55,7 @@ public class SleepState : IState
         if (Time.time - fm.curTime >= 2)
         {
             arrived = false;
+            cleared = false;
             fm.ToWanderState();
         }
     }
