@@ -7,40 +7,50 @@ using System.Collections.Generic;
 public class UseState : IState
 
 {
-    private readonly StatePattern guy;
+    private readonly StatePattern fm;
+    public bool arrived = false;
 
     public UseState(StatePattern statePatternGuy)
     {
-        guy = statePatternGuy;
+        fm = statePatternGuy;
     }
 
     public void UpdateState()
     {
-        guy.ItsTime();
-        Use();
-    }
-
-    //Change state functions
-
-    public void ToGoUseState()
-    { }
-
-    public void ToUseState()
-    { }
-
-    public void ToWanderState()
-    {
-        guy.currentState = guy.wanderState;
+        fm.ItsTime();
+        if (arrived)
+        {
+            Use();
+        }
+        else
+        {
+            GoUse();
+        }
     }
 
     //State - Functions
 
+    public void GoUse()
+    {
+        if (Vector3.Distance(fm.activityToMake.device.transform.position, fm.transform.position) < 2 )
+        {
+            fm.GetComponent<NavMeshAgent>().Stop();
+            fm.curTime = Time.time;
+            arrived = true;
+        }
+        else
+        {
+            fm.GetComponent<NavMeshAgent>().destination = fm.activityToMake.device.transform.position;
+            fm.GetComponent<NavMeshAgent>().Resume();
+        }
+    }
+
     public void Use()
     {
-        if (Time.time >= guy.curTime + guy.activityToMake.timeOfExec)
+        if (Time.time >= fm.curTime + fm.activityToMake.timeOfExec)
         {
-            guy.Clear();
-            ToWanderState();
+            fm.Clear();
+            fm.ToWanderState();
         }
     }
 }

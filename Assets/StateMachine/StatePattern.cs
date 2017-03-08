@@ -11,7 +11,10 @@ public class StatePattern : MonoBehaviour
     public Activity refusedActivity;
     public int timesRefused;
     public float wanderOff;
+    public float wanderTime;
+    public float wanderTick;
     public Transform[] wanderpoints;
+    
 
     [HideInInspector]
     public float curTime;
@@ -21,8 +24,6 @@ public class StatePattern : MonoBehaviour
     public SleepState sleepState;
     [HideInInspector]
     public OutState outState;
-    [HideInInspector]
-    public GoUseState goUseState;
     [HideInInspector]
     public UseState useState;
     [HideInInspector]
@@ -34,7 +35,6 @@ public class StatePattern : MonoBehaviour
     {
         sleepState = new SleepState(this);
         outState = new OutState(this);
-        goUseState = new GoUseState(this);
         useState = new UseState(this);
         wanderState = new WanderState(this);
 
@@ -42,25 +42,12 @@ public class StatePattern : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
-    public void ChooseActivity()
-    {
-        int i = 0;
-        activityToMake = null;
-        while (i < preferences.Length && activityToMake == null)
-        {
-            if (!preferences[i].device.used && preferences[i] != refusedActivity)
-            {
-                activityToMake = preferences[i];
-                activityToMake.device.used = true;
-            }
-            i += 1;
-        }
-    }
+   
 
     // Use this for initialization
     void Start()
     {
-        currentState = outState;
+        currentState = wanderState;
     }
 
     // Update is called once per frame
@@ -77,6 +64,7 @@ public class StatePattern : MonoBehaviour
         refusedActivity = null;
         activityToMake.device.used = false;
         activityToMake = null;
+        useState.arrived = false;
     }
 
     public void ItsTime()
@@ -95,17 +83,29 @@ public class StatePattern : MonoBehaviour
 
     public void ChangeActivity()
     {
-        if (timesRefused < 2 && (currentState == useState || currentState == goUseState))
+        if (timesRefused < 2 && currentState == useState )
         {
-            refusedActivity = activityToMake;
+            if (timesRefused ==0)
+            {
+                refusedActivity = activityToMake;
+            }
             timesRefused += 1;
             activityToMake.device.used = false;
             activityToMake = null;
+            useState.arrived = false;
+            wanderTime = Time.time;
             currentState = wanderState;
         }
         else
         {
             Debug.Log("go fuck yourself");
         }
+    }
+
+    public void ToWanderState()
+    {
+        currentState = wanderState;
+        wanderTime = Time.time;
+        wanderTick = Time.time;
     }
 }
