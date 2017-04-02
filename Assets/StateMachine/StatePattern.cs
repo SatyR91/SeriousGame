@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
-using System.Collections;
 
 public class StatePattern : MonoBehaviour
 {
@@ -14,8 +13,11 @@ public class StatePattern : MonoBehaviour
     public float wanderTime;
     public float wanderTick;
     public Transform[] wanderpoints;
+    public Transform clock;
 
 
+    [HideInInspector]
+    public float time;
     [HideInInspector]
     public float curTime;
     [HideInInspector]
@@ -40,6 +42,7 @@ public class StatePattern : MonoBehaviour
 
         timesRefused = 1;
         navMeshAgent = GetComponent<NavMeshAgent>();
+        time = clock.GetComponent<DigitalGameTimeClock>().currentTime;
     }
 
 
@@ -73,11 +76,11 @@ public class StatePattern : MonoBehaviour
 
     public void ItsTime()
     {
-        if (Time.time >= 30 && Time.time <= 31)
+        if (time >= 150 && time <= 151)
         {
             currentState = sleepState;
         }
-        if (Time.time >= 10 && Time.time <= 11)
+        if (time >= 50 && time <= 51)
         {
             currentState = outState;
         }
@@ -96,7 +99,7 @@ public class StatePattern : MonoBehaviour
             activityToMake.device.on = false;
             activityToMake = null;
             useState.arrived = false;
-            wanderTime = Time.time;
+            wanderTime = time;
             currentState = wanderState;
         }
         else
@@ -108,7 +111,12 @@ public class StatePattern : MonoBehaviour
     public void ToWanderState()
     {
         currentState = wanderState;
-        wanderTime = Time.time;
-        wanderTick = Time.time;
+        wanderTime = time;
+        wanderTick = time;
+    }
+
+    public void Uptime()
+    {
+        time = clock.GetComponent<DigitalGameTimeClock>().currentTime;
     }
 }

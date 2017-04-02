@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
-using System.Collections;
-using System.Collections.Generic;
 
 public class WanderState : IState
 
@@ -18,6 +16,7 @@ public class WanderState : IState
 
     public void UpdateState()
     {
+        fm.Uptime();
         fm.ItsTime();
         TimeToDo();
         if (arrived)
@@ -56,21 +55,21 @@ public class WanderState : IState
 
     public void TimeToDo()
     {
-        if (Time.time - fm.wanderTime >= 4)
+        if (fm.time - fm.wanderTime >= 30)
         {
             ChooseActivity();
             ToUseState();
         }
         else
         {
-            if (Time.time - fm.wanderTick >= 1)
+            if (fm.time - fm.wanderTick >= 5)
             {
-                if (UnityEngine.Random.value <= fm.wanderOff)
+                if (Random.value <= fm.wanderOff)
                 {
                     ChooseActivity();
                     ToUseState();
                 }
-                fm.wanderTick = Time.time;
+                fm.wanderTick = fm.time;
             }
         }
     }
@@ -81,15 +80,15 @@ public class WanderState : IState
         fm.GetComponent<NavMeshAgent>().Resume();
         if (Vector3.Distance(fm.wanderpoints[nextWanderPoint].position, fm.transform.position) < 1)
         {
-            waitTime = Random.Range(1, 3);
+            waitTime = Random.Range(1, 5);
             arrived = true;
-            fm.curTime = Time.time;
+            fm.curTime = fm.time;
         }
     }
 
     public void PassiveWander()
     {
-        if (Time.time >= fm.curTime + waitTime)
+        if (fm.time >= fm.curTime + waitTime)
         {
             nextWanderPoint =  (int) Random.Range(0, (fm.wanderpoints.Length-0.001f));
             arrived = false;
