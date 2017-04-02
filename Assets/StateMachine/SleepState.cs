@@ -1,8 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
-using System.Collections;
-using System;
-using System.Collections.Generic;
 
 public class SleepState : IState
 
@@ -18,6 +15,7 @@ public class SleepState : IState
 
     public void UpdateState()
     {
+        fm.Uptime();
         if(!cleared)
         {
             fm.Clear();
@@ -40,7 +38,7 @@ public class SleepState : IState
         if (Vector3.Distance(fm.bed.position, fm.transform.position) < 1)
         {
             fm.GetComponent<NavMeshAgent>().Stop();
-            fm.curTime = Time.time;
+            fm.curTime = fm.time;
             arrived = true;
         }
         else
@@ -52,7 +50,7 @@ public class SleepState : IState
 
     public void Sleep()
     {
-        if (Time.time - fm.curTime >= 2)
+        if (fm.time - fm.curTime >= 15)
         {
             arrived = false;
             cleared = false;

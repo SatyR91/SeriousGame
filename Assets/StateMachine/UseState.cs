@@ -1,8 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
-using System.Collections;
-using System;
-using System.Collections.Generic;
 
 public class UseState : IState
 
@@ -17,6 +14,7 @@ public class UseState : IState
 
     public void UpdateState()
     {
+        fm.Uptime();
         fm.ItsTime();
         if (arrived)
         {
@@ -32,10 +30,10 @@ public class UseState : IState
 
     public void GoUse()
     {
-        if (Vector3.Distance(fm.activityToMake.device.transform.position, fm.transform.position) < 0.5 )
+        if (Vector3.Distance(fm.activityToMake.device.transform.position, fm.transform.position) < 2 )
         {
             fm.GetComponent<NavMeshAgent>().Stop();
-            fm.curTime = Time.time;
+            fm.curTime = fm.time;
             fm.activityToMake.device.on = true;
             arrived = true;
         }
@@ -48,7 +46,7 @@ public class UseState : IState
 
     public void Use()
     {
-        if (Time.time >= fm.curTime + fm.activityToMake.timeOfExec)
+        if (fm.time >= fm.curTime + fm.activityToMake.timeOfExec)
         {
             fm.Clear();
             fm.ToWanderState();
