@@ -6,6 +6,7 @@ public class Device : MonoBehaviour{
     private GameController gC;
 
     public int id;
+    public int level;
     public string deviceName;
     public float consumption;
     public bool used;
