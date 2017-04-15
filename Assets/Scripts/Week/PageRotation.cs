@@ -13,11 +13,9 @@ public class PageRotation : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         RotatePage();
-
-
     } 
 
-    void RotatePage()
+    public void RotatePage()
     {
         if (!rotationDone) {
             if (transform.rotation.eulerAngles.y < 140)
@@ -26,7 +24,7 @@ public class PageRotation : MonoBehaviour {
                 {
                     DestroyTextMeshes();
                 }
-                gameObject.transform.Rotate(gameObject.transform.up, 1f);
+                gameObject.transform.Rotate(gameObject.transform.up, 2f);
             }
             else
             {
