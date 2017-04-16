@@ -14,11 +14,13 @@ public class StatePattern : MonoBehaviour
     public float wanderTick;
     public Transform[] wanderpoints;
     public Transform clock;
+    public int sleepTime;
+    public int workTime;
 
 
     [HideInInspector]
     public float time;
-    [HideInInspector]
+    //[HideInInspector]
     public float curTime;
     [HideInInspector]
     public IState currentState;
@@ -76,11 +78,11 @@ public class StatePattern : MonoBehaviour
 
     public void ItsTime()
     {
-        if (time >= 150 && time <= 151)
+        if (time >= sleepTime && time <= sleepTime +1)
         {
             currentState = sleepState;
         }
-        if (time >= 50 && time <= 51)
+        if (time >= workTime && time <= workTime +1)
         {
             currentState = outState;
         }
