@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
+using System;
 
 public class StatePattern : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class StatePattern : MonoBehaviour
     public Transform bed;
     public Transform outside;
     public Activity[] preferences;
+    public float[] prefKeys;
     public Activity refusedActivity;
     public int timesRefused;
     public float wanderOff;
@@ -14,11 +16,16 @@ public class StatePattern : MonoBehaviour
     public float wanderTick;
     public Transform[] wanderpoints;
     public Transform clock;
+    public int sleepTime;
+    public int workTime;
+    public float workImportance;
+    public float moralImportance;
+    public float socialImportance; 
 
 
     [HideInInspector]
     public float time;
-    [HideInInspector]
+    //[HideInInspector]
     public float curTime;
     [HideInInspector]
     public IState currentState;
@@ -43,6 +50,10 @@ public class StatePattern : MonoBehaviour
         timesRefused = 1;
         navMeshAgent = GetComponent<NavMeshAgent>();
         time = clock.GetComponent<DigitalGameTimeClock>().currentTime;
+
+        prefKeys = new float[preferences.Length];
+        UpdatePrefKeys();
+        UpdatePreferences();
     }
 
 
@@ -76,11 +87,11 @@ public class StatePattern : MonoBehaviour
 
     public void ItsTime()
     {
-        if (time >= 150 && time <= 151)
+        if (time >= sleepTime && time <= sleepTime +1)
         {
             currentState = sleepState;
         }
-        if (time >= 50 && time <= 51)
+        if (time >= workTime && time <= workTime +1)
         {
             currentState = outState;
         }
@@ -118,5 +129,19 @@ public class StatePattern : MonoBehaviour
     public void Uptime()
     {
         time = clock.GetComponent<DigitalGameTimeClock>().currentTime;
+    }
+
+    public void UpdatePrefKeys()
+    {
+        for(int i = 0; i< preferences.Length; i++)
+        {
+            Activity tmp = preferences[i];
+            prefKeys[i] = 10000/(tmp.moralValue * moralImportance + tmp.workValue * workImportance + tmp.socialValue * socialImportance);
+        }
+    }
+
+    public void UpdatePreferences()
+    {
+        Array.Sort(prefKeys,preferences);
     }
 }
