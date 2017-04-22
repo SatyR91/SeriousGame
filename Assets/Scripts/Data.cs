@@ -34,6 +34,10 @@ public class Data : MonoBehaviour {
     public int GamingComputerLevel;
     public int TelevisionLevel;
     public int Money;
+    public int MoralBoostLevel;
+    public int LightBoostLevel;
+    public int ConsumptionBoostLevel;
+    public int SkillPoints;
 
     private bool AlreadyPresent()
     {
