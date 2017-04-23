@@ -5,10 +5,10 @@ using UnityEngine;
 public class FamilyUpgradeValidation : MonoBehaviour {
 
     public Data data;
-
+    public GameObject Upgrades;
     public void OnClick()
     {
-        foreach(Transform child in GameObject.Find("Upgrades").transform)
+        foreach(Transform child in Upgrades.transform)
         {
             FamilyUpgradeButton currentUpgrade = child.gameObject.GetComponent<FamilyUpgradeButton>();
             if (currentUpgrade.isActive)
