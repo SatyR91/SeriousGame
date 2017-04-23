@@ -16,7 +16,8 @@ public class UpgradeButton : MonoBehaviour {
     public Data data;
     public Button ValidationButton;
     public Text MoneyText;
-
+    public GameObject Necessities;
+    public GameObject Entertainment;
     public void Start()
     {
         switch(DeviceName)
@@ -56,7 +57,7 @@ public class UpgradeButton : MonoBehaviour {
     
 	public void OnClick()
     {
-        foreach(Transform child in GameObject.Find("Necessities").transform)
+        foreach(Transform child in Necessities.transform)
         {
             if(child.gameObject == this.gameObject)
             {
@@ -67,7 +68,7 @@ public class UpgradeButton : MonoBehaviour {
                 child.gameObject.GetComponent<UpgradeButton>().isActive = false;
             }
         }
-        foreach (Transform child in GameObject.Find("Entertainment").transform)
+        foreach (Transform child in Entertainment.transform)
         {
             if (child.gameObject == this.gameObject)
             {

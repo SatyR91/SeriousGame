@@ -6,10 +6,12 @@ public class UpgradeValidation : MonoBehaviour {
 
 
     public Data data;
+    public GameObject Necessities;
+    public GameObject Entertainment;
 
     public void OnClick()
     {
-        foreach (Transform child in GameObject.Find("Necessities").transform)
+        foreach (Transform child in Necessities.transform)
         {
             UpgradeButton currentdevice = child.gameObject.GetComponent<UpgradeButton>();
             if (currentdevice.isActive)
@@ -65,7 +67,7 @@ public class UpgradeValidation : MonoBehaviour {
                 }
             }
         }
-        foreach(Transform child in GameObject.Find("Entertainment").transform)
+        foreach(Transform child in Entertainment.transform)
         {
             UpgradeButton currentdevice = child.gameObject.GetComponent<UpgradeButton>();
             if(currentdevice.isActive)
