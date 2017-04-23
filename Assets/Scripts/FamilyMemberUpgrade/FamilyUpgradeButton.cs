@@ -13,10 +13,11 @@ public class FamilyUpgradeButton : MonoBehaviour {
     public Data data;
     public Button ValidationButton;
     public Text SkillPointText;
-
+    public GameObject Upgrades;
 	// Use this for initialization
 	void Start () {
-	    switch(UpgradeName)
+        data = GameObject.Find("Data").GetComponent<Data>();
+        switch (UpgradeName)
         {
             case ("Light"):
                 UpgradeLevel = data.LightBoostLevel;
@@ -30,12 +31,13 @@ public class FamilyUpgradeButton : MonoBehaviour {
             default:
                 break;
         }
+        
         UpdateFromData();	
 	}
 	
 	public void OnClick()
     {
-        foreach(Transform child in GameObject.Find("Upgrades").transform)
+        foreach(Transform child in Upgrades.transform)
         {
             if(child.gameObject == this.gameObject)
             {

@@ -20,7 +20,8 @@ public class UpgradeButton : MonoBehaviour {
     public GameObject Entertainment;
     public void Start()
     {
-        switch(DeviceName)
+        data = GameObject.Find("Data").GetComponent<Data>();
+        switch (DeviceName)
         {
             case ("Dishwasher"):
                 DeviceLevel = data.DishwasherLevel;

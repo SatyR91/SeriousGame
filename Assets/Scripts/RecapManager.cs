@@ -13,6 +13,7 @@ public class RecapManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        data = GameObject.Find("Data").GetComponent<Data>();
         LightConsumptionNumberText.text = data.LightConsumption.ToString() + " W";
         NecessitiesConsumptionNumberText.text = data.NecessitiesConsumption.ToString() + " W";
         EntertainmentConsumptionNumberText.text = data.EntertainmentConsumption.ToString() + " W";
