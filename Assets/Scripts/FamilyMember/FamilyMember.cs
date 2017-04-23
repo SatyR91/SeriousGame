@@ -7,6 +7,8 @@ public class FamilyMember : MonoBehaviour {
     public string surname;
     public float moral;
     public float social;
+    public float socialValue;
+    public float workValue;
     public Mesh mesh;
     public List<float> envies;
 
@@ -24,8 +26,6 @@ public class FamilyMember : MonoBehaviour {
         else
         {
             moral += value;
-        }
-       
+        }       
     }
-
 }

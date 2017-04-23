@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-public class UseState : IState
+public class ChatState : IState
 
 {
     private readonly StatePattern fm;
     public bool arrived = false;
 
-    public UseState(StatePattern statePatternGuy)
+    public ChatState(StatePattern statePatternGuy)
     {
         fm = statePatternGuy;
     }
@@ -18,39 +18,45 @@ public class UseState : IState
         fm.ItsTime();
         if (arrived)
         {
-            Use();
+            Chat();
         }
         else
         {
-            GoUse();
+            GoChat();
         }
     }
 
+
     //State - Functions
 
-    public void GoUse()
+    public void GoChat()
     {
-        if (Vector3.Distance(fm.activityToMake.device.transform.position, fm.transform.position) < 2 )
+        if (Vector3.Distance(fm.guyToTalkTo.transform.position, fm.transform.position) < 2)
         {
             fm.GetComponent<NavMeshAgent>().Stop();
             fm.curTime = fm.time;
-            fm.activityToMake.device.on = true;
             arrived = true;
         }
         else
         {
-            fm.GetComponent<NavMeshAgent>().destination = fm.activityToMake.device.transform.position;
+            fm.GetComponent<NavMeshAgent>().destination = fm.guyToTalkTo.transform.position;
             fm.GetComponent<NavMeshAgent>().Resume();
         }
     }
 
-    public void Use()
+
+    public void Chat()
     {
-        if (fm.time >= fm.curTime + fm.activityToMake.timeOfExec)
+        if (Vector3.Distance(fm.guyToTalkTo.transform.position, fm.transform.position) > 2)
         {
-            fm.Clear();
-            fm.hasTalked = false;
-            fm.ToWanderState();
+            fm.currentState = fm.wanderState;
+        }
+        if (fm.time >= fm.curTime + fm.chatTime)
+        {
+            fm.currentState = fm.wanderState;
         }
     }
+
+
+
 }

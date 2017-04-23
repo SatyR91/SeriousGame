@@ -8,10 +8,17 @@ public class WanderState : IState
     private float waitTime;
     private int nextWanderPoint;
     public bool arrived = false;
+    private float chatTick;
+    public StatePattern guy1;
+    public StatePattern guy2;
+    public StatePattern guy3;
 
     public WanderState(StatePattern statePatternGuy)
     {
         fm = statePatternGuy;
+        guy1 = statePatternGuy.otherGuy1.GetComponent<StatePattern>();
+        //guy2 = statePatternGuy.otherGuy2.GetComponent<StatePattern>();
+        //guy3 = statePatternGuy.otherGuy3.GetComponent<StatePattern>();
     }
 
     public void UpdateState()
@@ -19,6 +26,14 @@ public class WanderState : IState
         fm.Uptime();
         fm.ItsTime();
         TimeToDo();
+        if (!fm.hasTalked && (fm.time - chatTick >= 10))
+        {
+            chatTick = fm.time;
+            if (Random.Range(1,100) <= fm.socialSlider.value)
+            {
+                Chat();
+            }
+        }
         if (arrived)
         {
             PassiveWander();
@@ -38,6 +53,59 @@ public class WanderState : IState
 
     //State - Functions
 
+    public void Chat()
+    {
+        if (guy1.currentState == guy1.wanderState && !guy1.hasTalked)
+        {
+            fm.currentState = fm.chatState;
+            fm.guyToTalkTo = fm.otherGuy1;
+            arrived = false;
+            fm.chatState.arrived = false;
+            fm.hasTalked = true;
+            guy1.currentState = guy1.chatState;
+            guy1.guyToTalkTo = fm.gameObject;
+            guy1.wanderState.arrived = false;
+            guy1.chatState.arrived = false;
+            guy1.hasTalked = true;
+
+        }
+        else
+        {
+            if (guy2.currentState == guy2.wanderState && !guy2.hasTalked)
+            {
+                fm.currentState = fm.chatState;
+                fm.guyToTalkTo = fm.otherGuy2;
+                arrived = false;
+                fm.chatState.arrived = false;
+                fm.hasTalked = true;
+                guy2.currentState = guy2.chatState;
+                guy2.guyToTalkTo = fm.gameObject;
+                guy2.wanderState.arrived = false;
+                guy2.chatState.arrived = false;
+                guy2.hasTalked = true;
+
+            }
+            else
+            {
+                if (guy3.currentState == guy3.wanderState && !guy3.hasTalked)
+                {
+                    fm.currentState = fm.chatState;
+                    fm.guyToTalkTo = fm.otherGuy3;
+                    arrived = false;
+                    fm.chatState.arrived = false;
+                    fm.hasTalked = true;
+                    guy3.currentState = guy3.chatState;
+                    guy3.guyToTalkTo = fm.gameObject;
+                    guy3.wanderState.arrived = false;
+                    guy3.chatState.arrived = false;
+                    guy3.hasTalked = true;
+
+                }
+            }
+        }
+    }
+
+
     public void ChooseActivity()
     {
         int i = 0;
@@ -55,7 +123,7 @@ public class WanderState : IState
 
     public void TimeToDo()
     {
-        if (fm.time - fm.wanderTime >= 30)
+        if (fm.time - fm.wanderTime >= 100000)
         {
             ChooseActivity();
             ToUseState();
