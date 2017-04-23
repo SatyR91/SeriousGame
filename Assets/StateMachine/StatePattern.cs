@@ -23,8 +23,13 @@ public class StatePattern : MonoBehaviour
     public Slider workSlider;
     public Slider moralSlider;
     public Slider socialSlider;
+    public GameObject otherGuy1;
+    public GameObject otherGuy2;
+    public GameObject otherGuy3;
+    public float chatTime;
 
-
+    public GameObject guyToTalkTo;
+    public bool hasTalked;
     [HideInInspector]
     public float time;
     [HideInInspector]
@@ -40,6 +45,8 @@ public class StatePattern : MonoBehaviour
     [HideInInspector]
     public WanderState wanderState;
     [HideInInspector]
+    public ChatState chatState;
+    [HideInInspector]
     public NavMeshAgent navMeshAgent;
 
     private void Awake()
@@ -48,6 +55,7 @@ public class StatePattern : MonoBehaviour
         outState = new OutState(this);
         useState = new UseState(this);
         wanderState = new WanderState(this);
+        chatState = new ChatState(this);
 
         timesRefused = 1;
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -63,6 +71,7 @@ public class StatePattern : MonoBehaviour
     void Start()
     {
         currentState = wanderState;
+        hasTalked = false;
     }
 
     // Update is called once per frame
