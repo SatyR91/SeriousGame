@@ -39,6 +39,11 @@ public class Data : MonoBehaviour {
     public int ConsumptionBoostLevel;
     public int SkillPoints;
 
+
+    public float LightConsumption;
+    public float NecessitiesConsumption;
+    public float EntertainmentConsumption;
+
     private bool AlreadyPresent()
     {
         //Yeah datas ain't right but well, deal with it.
