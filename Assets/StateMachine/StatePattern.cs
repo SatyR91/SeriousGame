@@ -1,12 +1,16 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
+using System;
+using UnityEngine.UI;
 
 public class StatePattern : MonoBehaviour
 {
     public Activity activityToMake;
     public Transform bed;
     public Transform outside;
-    public Activity[] preferences;
+    public Activity[] activities;
+    public Activity[] mandActivities;
+    public float[] prefKeys;
     public Activity refusedActivity;
     public int timesRefused;
     public float wanderOff;
@@ -14,6 +18,11 @@ public class StatePattern : MonoBehaviour
     public float wanderTick;
     public Transform[] wanderpoints;
     public Transform clock;
+    public int sleepTime;
+    public int workTime;
+    public Slider workSlider;
+    public Slider moralSlider;
+    public Slider socialSlider;
 
 
     [HideInInspector]
@@ -43,6 +52,9 @@ public class StatePattern : MonoBehaviour
         timesRefused = 1;
         navMeshAgent = GetComponent<NavMeshAgent>();
         time = clock.GetComponent<DigitalGameTimeClock>().currentTime;
+
+        prefKeys = new float[activities.Length];
+        SortPreferences();
     }
 
 
@@ -76,19 +88,28 @@ public class StatePattern : MonoBehaviour
 
     public void ItsTime()
     {
-        if (time >= 150 && time <= 151)
+        if (time >= sleepTime && time <= sleepTime +1)
         {
             currentState = sleepState;
         }
-        if (time >= 50 && time <= 51)
+        if (time >= workTime && time <= workTime +1)
         {
             currentState = outState;
+        }
+        foreach (Activity a in mandActivities)
+        {
+            if (time >= a.MandStartTime && time <= a.MandStartTime + 1)
+            {
+                Clear();
+                activityToMake = a;
+                currentState = useState;
+            }
         }
     }
 
     public void ChangeActivity()
     {
-        if (timesRefused < 2 && currentState == useState)
+        if (timesRefused < 2 && currentState == useState && !activityToMake.MandatoryActivity)
         {
             if (timesRefused == 1)
             {
@@ -118,5 +139,15 @@ public class StatePattern : MonoBehaviour
     public void Uptime()
     {
         time = clock.GetComponent<DigitalGameTimeClock>().currentTime;
+    }
+
+    public void SortPreferences()
+    {
+        for(int i = 0; i< activities.Length; i++)
+        {
+            Activity tmp = activities[i];
+            prefKeys[i] = 10000/(tmp.moralValue * moralSlider.value + tmp.workValue * workSlider.value + tmp.socialValue * socialSlider.value);
+        }
+        Array.Sort(prefKeys, activities);
     }
 }

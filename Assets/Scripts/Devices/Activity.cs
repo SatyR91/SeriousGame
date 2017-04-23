@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Activity : MonoBehaviour {
     public int id;
@@ -8,4 +6,9 @@ public class Activity : MonoBehaviour {
     public float moralGain;
     public float timeOfExec;
     public Device device;
+    public float workValue;
+    public float moralValue;
+    public float socialValue;
+    public bool MandatoryActivity;
+    public float MandStartTime;
 }
