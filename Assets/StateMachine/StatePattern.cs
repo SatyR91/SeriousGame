@@ -80,7 +80,7 @@ public class StatePattern : MonoBehaviour
         if (activityToMake != null)
         {
             activityToMake.device.used = false;
-            activityToMake.device.on = false;
+            activityToMake.device.setOn(false);
         }
         activityToMake = null;
         useState.arrived = false;
@@ -117,7 +117,7 @@ public class StatePattern : MonoBehaviour
             }
             timesRefused += 1;
             activityToMake.device.used = false;
-            activityToMake.device.on = false;
+            activityToMake.device.setOn(false);
             activityToMake = null;
             useState.arrived = false;
             wanderTime = time;

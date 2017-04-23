@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour {
     public FamilyMember fm3;
     public FamilyMember fm4;
 
+    public float currentEnergyUsed;
     public float energy;
     public float energyMax = 100;
     public float money;
@@ -19,9 +20,9 @@ public class GameController : MonoBehaviour {
     public float energyAwareness;
     // Use this for initialization
     void Start () {
-        energy = energyMax;
+        currentEnergyUsed = 0;
+        energy = 0;
         money = moneyMax;
-        EnergyLoss(20);
 	}
 	
 	// Update is called once per frame
