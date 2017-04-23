@@ -9,4 +9,6 @@ public class Activity : MonoBehaviour {
     public float workValue;
     public float moralValue;
     public float socialValue;
+    public bool MandatoryActivity;
+    public float MandStartTime;
 }

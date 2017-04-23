@@ -42,11 +42,11 @@ public class WanderState : IState
     {
         int i = 0;
         fm.activityToMake = null;
-        while (i < fm.preferences.Length && fm.activityToMake == null)
+        while (i < fm.activities.Length && fm.activityToMake == null)
         {
-            if (!fm.preferences[i].device.used && fm.preferences[i] != fm.refusedActivity)
+            if (!fm.activities[i].device.used && fm.activities[i] != fm.refusedActivity)
             {
-                fm.activityToMake = fm.preferences[i];
+                fm.activityToMake = fm.activities[i];
                 fm.activityToMake.device.used = true;
             }
             i += 1;
