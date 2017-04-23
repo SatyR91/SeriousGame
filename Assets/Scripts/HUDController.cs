@@ -42,16 +42,18 @@ public class HUDController : MonoBehaviour {
         surnameFm2.GetComponent<Text>().text = fm2.surname;
         surnameFm3.GetComponent<Text>().text = fm3.surname;
         surnameFm4.GetComponent<Text>().text = fm4.surname;
+        BarsUpdate();
     }
 	
 	// Update is called once per frame
 	void Update () {
         if (barsUpdateTime)
-            StartCoroutine(FinishFirst(3.0f, BarsUpdate));
+           StartCoroutine(FinishFirst(3.0f, BarsUpdate));
         ActivityUpdate(activityTextFm1, fm1);
         ActivityUpdate(activityTextFm2, fm2);
         ActivityUpdate(activityTextFm3, fm3);
         ActivityUpdate(activityTextFm4, fm4);
+        currentEnergyUsedUpdate();
     }
 
     IEnumerator FinishFirst(float waitTime, System.Action doLast)
@@ -63,7 +65,6 @@ public class HUDController : MonoBehaviour {
 
     void BarsUpdate()
     {
-        BarUpdate(globalEnergyPanel, gameController.energy, gameController.energyMax);
         BarUpdate(globalMoneyPanel, gameController.money, gameController.moneyMax);
         BarUpdate(moralPanelFm1, fm1.moral, 100);
         BarUpdate(moralPanelFm2, fm2.moral, 100);
@@ -71,6 +72,11 @@ public class HUDController : MonoBehaviour {
         BarUpdate(moralPanelFm4, fm4.moral, 100);
         GlobalMoralUpdate(globalMoralPanel, fm1, fm2, fm3, fm4);
         barsUpdateTime = true;
+    }
+
+    void currentEnergyUsedUpdate()
+    {
+        BarUpdate(globalEnergyPanel, gameController.currentEnergyUsed, gameController.energyMax);
     }
 
     /// <summary>

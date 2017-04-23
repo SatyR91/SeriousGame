@@ -14,14 +14,28 @@ public class Device : MonoBehaviour{
     private void Start()
     {
         gC = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+        light.SetActive(false);
     }
 
     private void Update()
     {
-        light.SetActive(on);
         if (on)
         {
-            gC.energy -= consumption;
+            gC.energy += consumption;
+        }
+    }
+
+    public void setOn(bool b)
+    {
+        if (b)
+        {
+            light.SetActive(true);
+            gC.currentEnergyUsed += consumption;
+        }
+        else
+        {
+            light.SetActive(false);
+            gC.currentEnergyUsed -= consumption;
         }
     }
 }
