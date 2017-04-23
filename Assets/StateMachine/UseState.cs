@@ -34,7 +34,7 @@ public class UseState : IState
         {
             fm.GetComponent<NavMeshAgent>().Stop();
             fm.curTime = fm.time;
-            fm.activityToMake.device.on = true;
+            fm.activityToMake.device.setOn(true);
             arrived = true;
         }
         else

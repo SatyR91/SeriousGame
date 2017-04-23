@@ -7,6 +7,7 @@ public class LightsOff : MonoBehaviour {
     public GameController gameController;
     public List<Transform> lightsGO;
     private List<Light> lights;
+    public float energyConsumption = 1;
 
     //number of person in the room
     int numberOfPerson = 0;
@@ -27,6 +28,7 @@ public class LightsOff : MonoBehaviour {
             if (!lights[0].enabled) {
                 foreach (Light l in lights) {
                     l.enabled = true;
+                    gameController.currentEnergyUsed += energyConsumption;
                 }
             }
         }
@@ -42,6 +44,7 @@ public class LightsOff : MonoBehaviour {
                     Debug.Log("YEP : " + randomFloat);
                     foreach (Light l in lights) {
                         l.enabled = false;
+                        gameController.currentEnergyUsed -= energyConsumption;
                     }
                 }
                 else {
