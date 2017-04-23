@@ -17,6 +17,11 @@ public class HUDController : MonoBehaviour {
     public Transform moralPanelFm3;
     public Transform moralPanelFm4;
 
+    public Text activityTextFm1;
+    public Text activityTextFm2;
+    public Text activityTextFm3;
+    public Text activityTextFm4;
+
     public Transform surnameFm1;
     public Transform surnameFm2;
     public Transform surnameFm3;
@@ -43,6 +48,10 @@ public class HUDController : MonoBehaviour {
 	void Update () {
         if (barsUpdateTime)
             StartCoroutine(FinishFirst(3.0f, BarsUpdate));
+        ActivityUpdate(activityTextFm1, fm1);
+        ActivityUpdate(activityTextFm2, fm2);
+        ActivityUpdate(activityTextFm3, fm3);
+        ActivityUpdate(activityTextFm4, fm4);
     }
 
     IEnumerator FinishFirst(float waitTime, System.Action doLast)
@@ -84,5 +93,22 @@ public class HUDController : MonoBehaviour {
         BarUpdate(barPanel, globalMoral, 100);
     }
 
+    public void ActivityUpdate(Text activityText, FamilyMember fm)
+    {
+        if (fm.GetComponent<StatePattern>().currentState == fm.GetComponent<StatePattern>().wanderState) {
+            activityText.text = "Wondering";
+        }
+        else if (fm.GetComponent<StatePattern>().currentState == fm.GetComponent<StatePattern>().sleepState) {
+            activityText.text = "Sleeping";
+        }
+        else if (fm.GetComponent<StatePattern>().currentState == fm.GetComponent<StatePattern>().outState)
+        {
+            activityText.text = "Working";
+        }
+        else {
+            activityText.text = fm.GetComponent<StatePattern>().activityToMake.activityName;
+        }
+       
+    }
     
 }
