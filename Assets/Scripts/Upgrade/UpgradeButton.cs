@@ -99,7 +99,7 @@ public class UpgradeButton : MonoBehaviour {
 
     public void UpdateFromData()
     {
-        DeviceLevelText.text = "LVL : " + DeviceLevel;
+        DeviceLevelText.text = "LVL " + DeviceLevel;
         MoneyText.text = data.Money.ToString();
     }
 }
