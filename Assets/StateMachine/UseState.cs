@@ -48,8 +48,6 @@ public class UseState : IState
     {
         if (fm.time >= fm.curTime + fm.activityToMake.timeOfExec)
         {
-            //fm.Uptime();
-            //fm.curTime = fm.time;
             fm.Clear();
             fm.ToWanderState();
         }
