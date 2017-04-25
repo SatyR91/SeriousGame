@@ -22,6 +22,16 @@ public class HUDController : MonoBehaviour {
     public Text activityTextFm3;
     public Text activityTextFm4;
 
+    public Image socialImageFm1;
+    public Image socialImageFm2;
+    public Image socialImageFm3;
+    public Image socialImageFm4;
+
+    public Image workImageFm1;
+    public Image workImageFm2;
+    public Image workImageFm3;
+    public Image workImageFm4;
+    
     public Transform surnameFm1;
     public Transform surnameFm2;
     public Transform surnameFm3;
@@ -65,11 +75,19 @@ public class HUDController : MonoBehaviour {
 
     void BarsUpdate()
     {
-        BarUpdate(globalMoneyPanel, gameController.money, gameController.moneyMax);
         BarUpdate(moralPanelFm1, fm1.moral, 100);
         BarUpdate(moralPanelFm2, fm2.moral, 100);
         BarUpdate(moralPanelFm3, fm3.moral, 100);
         BarUpdate(moralPanelFm4, fm4.moral, 100);
+        SocialValueUpdate(socialImageFm1, fm1);
+        SocialValueUpdate(socialImageFm2, fm2);
+        SocialValueUpdate(socialImageFm3, fm3);
+        SocialValueUpdate(socialImageFm4, fm4);
+        WorkValueUpdate(workImageFm1, fm1);
+        WorkValueUpdate(workImageFm2, fm2);
+        WorkValueUpdate(workImageFm3, fm3);
+        WorkValueUpdate(workImageFm4, fm4);
+
         GlobalMoralUpdate(globalMoralPanel, fm1, fm2, fm3, fm4);
         barsUpdateTime = true;
     }
@@ -116,5 +134,37 @@ public class HUDController : MonoBehaviour {
         }
        
     }
-    
+
+    public void SocialValueUpdate(Image socialImage, FamilyMember fm)
+    {
+        if (fm.socialValue >= 75)
+        {
+            socialImage.color = Color.green;
+        }
+        else if (fm.socialValue >= 25)
+        {
+            socialImage.color = Color.yellow;
+        }
+        else if (fm.socialValue <= 25)
+        {
+            socialImage.color = Color.red;
+        }
+    }
+
+    public void WorkValueUpdate(Image workImage, FamilyMember fm)
+    {
+        if (fm.workValue >= 75)
+        {
+            workImage.color = Color.green;
+        }
+        else if (fm.workValue >= 50)
+        {
+            workImage.color = Color.yellow;
+        }
+        else if (fm.workValue <= 25)
+        {
+            workImage.color = Color.red;
+        }
+    }
+
 }
