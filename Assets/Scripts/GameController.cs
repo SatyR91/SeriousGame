@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
     public FamilyMember fm1;
@@ -13,11 +14,12 @@ public class GameController : MonoBehaviour {
     public float energyMax = 100;
     public float money;
     public float moneyMax = 100;
-
     public float moralLossPerTick = 0.005f;
     public float EnergyConsumption;
 
     public float energyAwareness;
+
+    public DigitalGameTimeClock gameClock;
     // Use this for initialization
     void Start () {
         currentEnergyUsed = 0;
@@ -30,6 +32,11 @@ public class GameController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         MoralLossTick(moralLossPerTick);
+
+        if (fm3.GetComponent<StatePattern>().currentState == fm3.GetComponent<StatePattern>().sleepState && gameClock.currentTime >= 90)
+        {
+            SceneManager.LoadSceneAsync("Week");
+        }
 	}
 
     /// <summary>

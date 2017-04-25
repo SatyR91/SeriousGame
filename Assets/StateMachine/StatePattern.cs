@@ -20,9 +20,9 @@ public class StatePattern : MonoBehaviour
     public Transform clock;
     public int sleepTime;
     public int workTime;
-    public Slider workSlider;
-    public Slider moralSlider;
-    public Slider socialSlider;
+    public int workImportance;
+    public int moralImportance;
+    public int socialImportance;
     public GameObject otherGuy1;
     public GameObject otherGuy2;
     public GameObject otherGuy3;
@@ -155,7 +155,7 @@ public class StatePattern : MonoBehaviour
         for(int i = 0; i< activities.Length; i++)
         {
             Activity tmp = activities[i];
-            prefKeys[i] = 10000/(tmp.moralValue * moralSlider.value + tmp.workValue * workSlider.value + tmp.socialValue * socialSlider.value);
+            prefKeys[i] = 10000/(tmp.moralValue * moralImportance + tmp.workValue * workImportance + tmp.socialValue * socialImportance);
         }
         Array.Sort(prefKeys, activities);
     }
