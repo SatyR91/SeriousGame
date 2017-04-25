@@ -8,10 +8,10 @@ public class GoToCinema : DailyEvent {
     {
         id = 1;
         rarity = 0;
-        description = "Lapin est ped";
-        moralVariation = 20f;
+        description = "The parents went to the cinema";
+        moralVariation = 15f;
         energyVariation = 0;
-        moneyVariation = -10f;
+        moneyVariation = -30f;
         targets = list;
     }
 }
