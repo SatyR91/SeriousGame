@@ -29,7 +29,7 @@ public class WanderState : IState
         if (!fm.hasTalked && (fm.time - chatTick >= 10))
         {
             chatTick = fm.time;
-            if (Random.Range(1,100) <= fm.socialSlider.value)
+            if (Random.Range(1,100) <= fm.socialImportance)
             {
                 Chat();
             }
