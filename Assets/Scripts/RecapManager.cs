@@ -8,6 +8,8 @@ public class RecapManager : MonoBehaviour {
     public Text LightConsumptionNumberText;
     public Text NecessitiesConsumptionNumberText;
     public Text EntertainmentConsumptionNumberText;
+    public Text ExpectedConsumption;
+    public Text EnergySavedText;
     public Text TotalConsumptionNumberText;
     public Data data;
 
@@ -17,7 +19,14 @@ public class RecapManager : MonoBehaviour {
         LightConsumptionNumberText.text = data.LightConsumption.ToString() + " W";
         NecessitiesConsumptionNumberText.text = data.NecessitiesConsumption.ToString() + " W";
         EntertainmentConsumptionNumberText.text = data.EntertainmentConsumption.ToString() + " W";
-        TotalConsumptionNumberText.text = (data.EntertainmentConsumption + data.NecessitiesConsumption + data.EntertainmentConsumption).ToString() + " W";
+        float TotalConsumption = data.EntertainmentConsumption + data.NecessitiesConsumption + data.LightConsumption;
+        float EnergySaved = TotalConsumption * (((float)data.ConsumptionBoostLevel * 2) / 100);
+        Debug.Log(data.ConsumptionBoostLevel);
+        Debug.Log(EnergySaved);
+        float TrueTotalConsumption = TotalConsumption - EnergySaved;
+        EnergySavedText.text = EnergySaved.ToString() + " W";
+        ExpectedConsumption.text = TotalConsumption.ToString() + " W";
+        TotalConsumptionNumberText.text = TrueTotalConsumption.ToString() + " W";
 	}
 	
 	// Update is called once per frame
