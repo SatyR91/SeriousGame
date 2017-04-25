@@ -20,7 +20,8 @@ public class UpgradeButton : MonoBehaviour {
     public GameObject Entertainment;
     public void Start()
     {
-        switch(DeviceName)
+        data = GameObject.Find("Data").GetComponent<Data>();
+        switch (DeviceName)
         {
             case ("Dishwasher"):
                 DeviceLevel = data.DishwasherLevel;
@@ -37,7 +38,7 @@ public class UpgradeButton : MonoBehaviour {
             case ("Washing Machine"):
                 DeviceLevel = data.WashingMachineLevel;
                 break;
-            case ("Drying Machine"):
+            case ("Vacuum cleaner"):
                 DeviceLevel = data.DryingMachineLevel;
                 break;
             case ("Casual Computer"):
@@ -80,7 +81,38 @@ public class UpgradeButton : MonoBehaviour {
             }
         }
         DeviceNameText.text = DeviceName;
-        DeviceDescriptionText.text = "This device is named : " + DeviceName + " and it's the best at what it does";
+        switch(DeviceName)
+        {
+            case ("Dishwasher"):
+                DeviceDescriptionText.text = "Dishwashers nowadays are pretty energy-efficient. However, most dishwashers cosume the same amount of electrical energy, regardless of the load size of the dishwasher. \nBuying a bigger dishwasher will allow the family to save more energy each time they are doing the dishes.";
+                break;
+            case ("Stove"):
+                DeviceDescriptionText.text = "Electrical stoves are cheaper than gas stoves, but they will cost more to operate in the long run (assuming gas prices don't vary that much). \nBuying a new stove with a smaller Energystar rating will allow the family to decrease their overall energy consumption.";
+                break;
+            case ("Microwave"):
+                DeviceDescriptionText.text = "Microwaves ovens are one of the most used appliances in the kitchen. \nBuying a microwave with a smaller EnergyStar rating will allow the family to cook or reheat their food at a smaller electrical cost.";
+                break;
+            case ("Refrigerator"):
+                DeviceDescriptionText.text = "Since it has to always use power to keep food fresh, a refregirator might be one of the best devices to save energy on. \nBuying a fridge with a smaller energy rating might lead to tremendous energy savings.";
+                break;
+            case ("Washing Machine"):
+                DeviceDescriptionText.text = "The newer your washing machine is, the more energy-efficient it will be. \nUpgrading this will change the family's washing machine for a recent model of front-load machine, then for a brand-new top-load machine, which use less electricity.";
+                break;
+            case ("Vacuum Cleaner"):
+                DeviceDescriptionText.text = "Interestingly enough, it is possible to be fined for an outdated vacuum-cleaner that is not power-efficient. Buying a new vacuum cleaner will help reduce energy expenditure. Moreover, it will quiet the house a bit, since most new vacuum cleaners are energy-efficient as well as quiet.";
+                break;
+            case ("Casual Computer"):
+                DeviceDescriptionText.text = "This computer is tailored for casual use, like social media checking or light media work. Changing some components like the processor will allow for a better user experience, at the cost of energy expenditure.";
+                break;
+            case ("Gaming Computer"):
+                DeviceDescriptionText.text = "Although manufacturers are working as hard as they can to produce more energy-efficient equipment, most gaming computers still represent a big spending energy-wise. \nUpgrading the gaming computer will make it more of an energy-guzzler, but will tremendosuly increase its entertainment potential.";
+                break;
+            case ("Television"):
+                DeviceDescriptionText.text = "Improvments in screen technologies, like the coming of the LCD, made television a cleanier entertainment device. Upgrading it will make it use more electricity, but will also increase visual comfort and entertainment for the family.";
+                break;
+            default:
+                break;
+        }
         UpgradeCostText.text = "Cost for upgrade : " + UpgradeCost[DeviceLevel];
         CheckForUpgrade();
     }

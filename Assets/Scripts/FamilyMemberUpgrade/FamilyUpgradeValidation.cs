@@ -6,6 +6,11 @@ public class FamilyUpgradeValidation : MonoBehaviour {
 
     public Data data;
     public GameObject Upgrades;
+
+    private void Start()
+    {
+        data = GameObject.Find("Data").GetComponent<Data>();
+    }
     public void OnClick()
     {
         foreach(Transform child in Upgrades.transform)
@@ -24,13 +29,13 @@ public class FamilyUpgradeValidation : MonoBehaviour {
                         currentUpgrade.UpdateFromData();
                         break;
                     case ("Moral"):
-                        data.LightBoostLevel++;
+                        data.MoralBoostLevel++;
                         currentUpgrade.UpgradeLevel++;
                         currentUpgrade.CheckForUpgrade();
                         currentUpgrade.UpdateFromData();
                         break;
                     case ("Energy"):
-                        data.LightBoostLevel++;
+                        data.ConsumptionBoostLevel++;
                         currentUpgrade.UpgradeLevel++;
                         currentUpgrade.CheckForUpgrade();
                         currentUpgrade.UpdateFromData();

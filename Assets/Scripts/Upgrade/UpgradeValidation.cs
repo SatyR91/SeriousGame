@@ -8,7 +8,10 @@ public class UpgradeValidation : MonoBehaviour {
     public Data data;
     public GameObject Necessities;
     public GameObject Entertainment;
-
+    private void Start()
+    {
+        data = GameObject.Find("Data").GetComponent<Data>();
+    }
     public void OnClick()
     {
         foreach (Transform child in Necessities.transform)
