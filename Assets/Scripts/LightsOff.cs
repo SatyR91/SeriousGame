@@ -39,7 +39,7 @@ public class LightsOff : MonoBehaviour {
             numberOfPerson--;
 
             if (numberOfPerson <= 0) {
-                float randomFloat = Random.Range(0f, 1f) + gameController.energyAwareness;
+                float randomFloat = Random.Range(0f, 1f) + (gameController.energyAwareness/10);
                 if (randomFloat > 1) {
                     Debug.Log("YEP : " + randomFloat);
                     foreach (Light l in lights) {
