@@ -29,9 +29,6 @@ public class UpgradeButton : MonoBehaviour {
             case ("Stove"):
                 DeviceLevel = data.StoveLevel;
                 break;
-            case ("Microwave"):
-                DeviceLevel = data.MicrowaveLevel;
-                break;
             case ("Refrigerator"):
                 DeviceLevel = data.RefrigeratorLevel;
                 break;
@@ -88,9 +85,6 @@ public class UpgradeButton : MonoBehaviour {
                 break;
             case ("Stove"):
                 DeviceDescriptionText.text = "Electrical stoves are cheaper than gas stoves, but they will cost more to operate in the long run (assuming gas prices don't vary that much). \nBuying a new stove with a smaller Energystar rating will allow the family to decrease their overall energy consumption.";
-                break;
-            case ("Microwave"):
-                DeviceDescriptionText.text = "Microwaves ovens are one of the most used appliances in the kitchen. \nBuying a microwave with a smaller EnergyStar rating will allow the family to cook or reheat their food at a smaller electrical cost.";
                 break;
             case ("Refrigerator"):
                 DeviceDescriptionText.text = "Since it has to always use power to keep food fresh, a refregirator might be one of the best devices to save energy on. \nBuying a fridge with a smaller energy rating might lead to tremendous energy savings.";

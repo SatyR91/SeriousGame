@@ -50,11 +50,6 @@ public class SleepState : IState
 
     public void Sleep()
     {
-        if (fm.time - fm.curTime >= 15)
-        {
-            arrived = false;
-            cleared = false;
-            fm.ToWanderState();
-        }
+
     }
 }

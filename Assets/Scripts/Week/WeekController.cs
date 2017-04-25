@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 public class WeekController : MonoBehaviour {
 
@@ -66,6 +66,10 @@ public class WeekController : MonoBehaviour {
     {
         daysTransform[currentDay].GetComponent<PageRotation>().enabled = true;
         currentDay++;
+        if (currentDay >= 6)
+        {
+            SceneManager.LoadSceneAsync("Recap");
+        }
         currentEvent = daysEvents[currentDay];
         daysTransform[currentDay].SetActive(true);
         WriteDailyEvent();
