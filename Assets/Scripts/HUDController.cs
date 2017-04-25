@@ -120,7 +120,7 @@ public class HUDController : MonoBehaviour {
     public void ActivityUpdate(Text activityText, FamilyMember fm)
     {
         if (fm.GetComponent<StatePattern>().currentState == fm.GetComponent<StatePattern>().wanderState) {
-            activityText.text = "Wondering";
+            activityText.text = "Wandering";
         }
         else if (fm.GetComponent<StatePattern>().currentState == fm.GetComponent<StatePattern>().sleepState) {
             activityText.text = "Sleeping";
