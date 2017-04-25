@@ -8,8 +8,8 @@ public class GoToBowling : DailyEvent {
     {
         id = 1;
         rarity = 0;
-        description = "Bitch is u drunk";
-        moralVariation = 40f;
+        description = "All the family went to the nearest bowling";
+        moralVariation = 20f;
         energyVariation = 0;
         moneyVariation = -50f;
         targets = list;
