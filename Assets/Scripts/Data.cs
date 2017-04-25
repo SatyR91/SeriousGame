@@ -26,7 +26,6 @@ public class Data : MonoBehaviour {
 
     public int DishwasherLevel;
     public int StoveLevel;
-    public int MicrowaveLevel;
     public int RefrigeratorLevel;
     public int WashingMachineLevel;
     public int DryingMachineLevel;
