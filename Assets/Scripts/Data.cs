@@ -44,6 +44,8 @@ public class Data : MonoBehaviour {
     public float NecessitiesConsumption;
     public float EntertainmentConsumption;
 
+    public int CurrentWeek;
+
     private bool AlreadyPresent()
     {
         //Yeah datas ain't right but well, deal with it.
@@ -54,6 +56,7 @@ public class Data : MonoBehaviour {
     {
         //Conservation of the new gameObject on load
         GameObject.DontDestroyOnLoad(gameObject);
+        CurrentWeek = 0;
     }
 
     public void Awake()
