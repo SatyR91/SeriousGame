@@ -9,7 +9,7 @@ public class TeenFriendBirthday : DailyEvent {
         id = 1;
         rarity = 1;
         description = "Josh is visiting a \n friend for his birthday";
-        moralVariation = 10f;
+        moralVariation = 5f;
         energyVariation = 0;
         moneyVariation = 0f;
         targets = list;

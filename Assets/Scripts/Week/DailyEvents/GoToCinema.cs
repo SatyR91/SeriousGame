@@ -9,7 +9,7 @@ public class GoToCinema : DailyEvent {
         id = 1;
         rarity = 0;
         description = "The parents went to the cinema";
-        moralVariation = 15f;
+        moralVariation = 7f;
         energyVariation = 0;
         moneyVariation = -30f;
         targets = list;

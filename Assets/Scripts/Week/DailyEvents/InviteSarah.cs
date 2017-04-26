@@ -9,7 +9,7 @@ public class InviteKidFriends : DailyEvent {
         id = 0;
         rarity = 0;
         description = "Lili invited her friends today";
-        moralVariation = 20f;
+        moralVariation = 10f;
         energyVariation = -15f;
         moneyVariation = -5f;
         targets = list;
