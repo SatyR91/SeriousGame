@@ -11,7 +11,7 @@ public class GameController : MonoBehaviour {
 
     public float currentEnergyUsed;
     public float energy;
-    public float energyMax = 100;
+    public float energyMax;
     public float money;
     public float moneyMax = 100;
     public float moralLossPerTick = 0.005f;
@@ -40,8 +40,9 @@ public class GameController : MonoBehaviour {
         fm3.moral = data.fm3Moral;
         fm4.moral = data.fm4Moral;
         currentEnergyUsed = 0;
-        energy = 0;
         money = data.Money;
+        energyMax = Mathf.Round(money / 15.0f);
+        energy = 0;
         energyAwareness = (float)GameObject.Find("Data").GetComponent<Data>().LightBoostLevel;
         Debug.Log(energyAwareness);
 
