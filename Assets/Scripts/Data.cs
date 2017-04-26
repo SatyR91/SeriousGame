@@ -50,6 +50,10 @@ public class Data : MonoBehaviour {
     public float TelevisionConsumption;
     public float MiscellanelousConsumption;
 
+    public float fm1Moral;
+    public float fm2Moral;
+    public float fm3Moral;
+    public float fm4Moral;
 
     public int CurrentWeek;
 

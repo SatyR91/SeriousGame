@@ -24,12 +24,19 @@ public class WeekHUDController : MonoBehaviour {
     private FamilyMember fm3;
     private FamilyMember fm4;
 
+    private Data data;
+
     // Use this for initialization
     void Start () {
         fm1 = gameController.fm1;
         fm2 = gameController.fm2;
         fm3 = gameController.fm3;
         fm4 = gameController.fm4;
+        data = GameObject.Find("Data").GetComponent<Data>();
+        fm1.moral = data.fm1Moral;
+        fm2.moral = data.fm2Moral;
+        fm3.moral = data.fm3Moral;
+        fm4.moral = data.fm4Moral;
         surnameFm1.GetComponent<Text>().text = fm1.surname;
         surnameFm2.GetComponent<Text>().text = fm2.surname;
         surnameFm3.GetComponent<Text>().text = fm3.surname;

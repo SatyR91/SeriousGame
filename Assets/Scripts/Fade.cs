@@ -12,7 +12,6 @@ public class Fade : MonoBehaviour {
         {
             if (_instance == null)
             {
-                Debug.Log("ForcedDataInitialisation");
                 GameObject data = new GameObject("Fader");
                 data.AddComponent<Fade>();
                 _instance = data.GetComponent<Fade>();
