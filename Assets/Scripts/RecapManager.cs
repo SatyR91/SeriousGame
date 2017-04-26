@@ -18,6 +18,14 @@ public class RecapManager : MonoBehaviour {
     public Text ExpectedConsumptionNumberText;
     public Text EnergySavedNumberText;
     public Text TotalConsumptionNumberText;
+    public Text PreviousBalanceText;
+    public Text IncomesText;
+    public Text EnergyBillText;
+    public Text TotalSavingsText;
+    public Text WeekText;
+    public int Income;
+    public int WattHourUnitPrice;
+
     public Data data;
 
 	// Use this for initialization
@@ -33,6 +41,15 @@ public class RecapManager : MonoBehaviour {
         GamingComputerConsumptionNumberText.text = data.GamingComputerConsumption.ToString() + " W";
         TelevisionConsumptionNumberText.text = data.TelevisionConsumption.ToString() + " W";
         MiscellanelousConsumptionNumberText.text = data.MiscellanelousConsumption.ToString() + " W";
+
+        PreviousBalanceText.text = "$ " + data.Money.ToString();
+        IncomesText.text = "$ " + Income.ToString();
+        //EnergyBillText.text = "$ " + TODO;
+        //TotalSavingsText.text = "$ " + TODO;
+
+
+        WeekText.text = "Week " + data.CurrentWeek.ToString();
+        
 
         float expectedConsumption = data.LightConsumption + data.DishwasherConsumption + data.StoveConsumption +
             data.RefrigeratorConsumption + data.WashingMachineConsumption + data.VacuumCleanerConsumption +
