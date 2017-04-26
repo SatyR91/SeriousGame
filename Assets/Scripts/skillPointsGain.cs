@@ -8,7 +8,11 @@ public class skillPointsGain : MonoBehaviour {
 	void Start () {
         data = GameObject.Find("Data").GetComponent<Data>();
         float totalMoral = data.fm1Moral + data.fm2Moral + data.fm3Moral + data.fm4Moral;
-        if (totalMoral >= 300 && data.totalSocial >= 75)
+        if (totalMoral >= 300)
+        {
+            data.SkillPoints++;
+        }
+        if (data.totalSocial >= 75)
         {
             data.SkillPoints++;
         }
