@@ -42,8 +42,10 @@ public class HUDController : MonoBehaviour {
     private FamilyMember fm3;
     private FamilyMember fm4;
 
+    private Data data;
     // Use this for initialization
     void Start () {
+        data = GameObject.Find("Data").GetComponent<Data>();
         fm1 = gameController.fm1;
         fm2 = gameController.fm2;
         fm3 = gameController.fm3;
@@ -52,6 +54,7 @@ public class HUDController : MonoBehaviour {
         surnameFm2.GetComponent<Text>().text = fm2.surname;
         surnameFm3.GetComponent<Text>().text = fm3.surname;
         surnameFm4.GetComponent<Text>().text = fm4.surname;
+        globalMoneyPanel.GetComponentInChildren<Text>().text = data.Money.ToString();
         BarsUpdate();
     }
 	
