@@ -36,10 +36,18 @@ public class WanderState : IState
         }
         if (arrived)
         {
+            if (fm.GetComponent<Animator>().GetBool("isWalking"))
+            {
+                fm.GetComponent<Animator>().SetBool("isWalking", false);
+            }
             PassiveWander();
         }
         else
         {
+            if (fm.GetComponent<Animator>().GetBool("isWalking"))
+            {
+                fm.GetComponent<Animator>().SetBool("isWalking", true);
+            }
             ActiveWander();
         }
     }
@@ -60,11 +68,13 @@ public class WanderState : IState
             fm.currentState = fm.chatState;
             fm.guyToTalkTo = fm.otherGuy1;
             arrived = false;
+            fm.GetComponent<Animator>().SetBool("isWalking", true);
             fm.chatState.arrived = false;
             fm.hasTalked = true;
             guy1.currentState = guy1.chatState;
             guy1.guyToTalkTo = fm.gameObject;
             guy1.wanderState.arrived = false;
+            guy1.GetComponent<Animator>().SetBool("isWalking", true);
             guy1.chatState.arrived = false;
             guy1.hasTalked = true;
 
@@ -76,11 +86,13 @@ public class WanderState : IState
                 fm.currentState = fm.chatState;
                 fm.guyToTalkTo = fm.otherGuy2;
                 arrived = false;
+                fm.GetComponent<Animator>().SetBool("isWalking", true);
                 fm.chatState.arrived = false;
                 fm.hasTalked = true;
                 guy2.currentState = guy2.chatState;
                 guy2.guyToTalkTo = fm.gameObject;
                 guy2.wanderState.arrived = false;
+                guy2.GetComponent<Animator>().SetBool("isWalking", true);
                 guy2.chatState.arrived = false;
                 guy2.hasTalked = true;
 
@@ -92,11 +104,13 @@ public class WanderState : IState
                     fm.currentState = fm.chatState;
                     fm.guyToTalkTo = fm.otherGuy3;
                     arrived = false;
+                    fm.GetComponent<Animator>().SetBool("isWalking", true);
                     fm.chatState.arrived = false;
                     fm.hasTalked = true;
                     guy3.currentState = guy3.chatState;
                     guy3.guyToTalkTo = fm.gameObject;
                     guy3.wanderState.arrived = false;
+                    guy3.GetComponent<Animator>().SetBool("isWalking", true);
                     guy3.chatState.arrived = false;
                     guy3.hasTalked = true;
 
@@ -126,9 +140,12 @@ public class WanderState : IState
 
     public void TimeToDo()
     {
-        if (fm.time - fm.wanderTime >= 100000)
+        if (fm.time - fm.wanderTime >= 30)
         {
+            //Debug.Log(fm.GetComponent<Animator>().GetBool("isWalking"));
             ChooseActivity();
+            fm.GetComponent<Animator>().SetBool("isWalking", true);
+            //Debug.Log(fm.gameObject.name);
             ToUseState();
         }
         else
@@ -137,7 +154,9 @@ public class WanderState : IState
             {
                 if (Random.value <= fm.wanderOff)
                 {
+                    //Debug.Log(fm.GetComponent<Animator>().GetBool("isWalking"));
                     ChooseActivity();
+                    fm.GetComponent<Animator>().SetBool("isWalking", true);
                     ToUseState();
                 }
                 fm.wanderTick = fm.time;

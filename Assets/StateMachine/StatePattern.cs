@@ -100,31 +100,21 @@ public class StatePattern : MonoBehaviour
     {
         if (time >= sleepTime && time <= sleepTime +1)
         {
-            /*if (currentState == useState && activityToMake.device.on)
-            {
-                activityToMake.device.timeOn += (time - curTime);
-            }*/
+            GetComponent<Animator>().SetBool("isWalking", true);
             currentState = sleepState;
         }
         if (time >= workTime && time <= workTime +1)
         {
-            /*if (currentState == useState && activityToMake.device.on)
-            {
-                activityToMake.device.timeOn += (time - curTime);
-            }*/
+            GetComponent<Animator>().SetBool("isWalking", true);
             currentState = outState;
         }
         foreach (Activity a in mandActivities)
         {
             if (time >= a.MandStartTime && time <= a.MandStartTime + 1)
             {
-               /* if (currentState == useState && activityToMake.device.on)
-                {
-                    activityToMake.device.timeOn += (time - curTime);
-                }*/
                 Clear();
-
                 activityToMake = a;
+                GetComponent<Animator>().SetBool("isWalking", true);
                 currentState = useState;
             }
         }
@@ -147,12 +137,12 @@ public class StatePattern : MonoBehaviour
             if (activityToMake.device.on)
             {
                 activityToMake.device.setOn(false);
-                //activityToMake.device.timeOn += (time - curTime);
             }
-            
+            GetComponent<FamilyMember>().moralLoss(15);
             activityToMake = null;
             useState.arrived = false;
             wanderTime = time;
+            GetComponent<Animator>().SetBool("isWalking", true);
             currentState = wanderState;
         }
         else
