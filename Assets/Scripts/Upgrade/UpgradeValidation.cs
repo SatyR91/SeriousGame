@@ -19,7 +19,6 @@ public class UpgradeValidation : MonoBehaviour {
             UpgradeButton currentdevice = child.gameObject.GetComponent<UpgradeButton>();
             if (currentdevice.isActive)
             {
-                Debug.Log("The device " + currentdevice.DeviceName + "is upgraded !");
                 switch(currentdevice.DeviceName)
                 {
                     case ("Dishwasher"):
@@ -68,7 +67,6 @@ public class UpgradeValidation : MonoBehaviour {
             UpgradeButton currentdevice = child.gameObject.GetComponent<UpgradeButton>();
             if(currentdevice.isActive)
             {
-                Debug.Log("The device" + currentdevice.DeviceName + "is upgraded !");
                 switch(currentdevice.DeviceName)
                 {
                     case ("Casual Computer"):

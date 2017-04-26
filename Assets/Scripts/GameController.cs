@@ -33,7 +33,6 @@ public class GameController : MonoBehaviour {
         energy = 0;
         money = moneyMax;
         energyAwareness = (float)GameObject.Find("Data").GetComponent<Data>().LightBoostLevel;
-        Debug.Log(energyAwareness);
 	}
 	
 	// Update is called once per frame
@@ -64,14 +63,7 @@ public class GameController : MonoBehaviour {
 
     public void EnergyLoss(float value)
     {
-        if (energy - value >= 0)
-        {
-            energy -= value;
-        }
-        else
-        {
-            // the end
-        }
+        data.LightConsumption += value;
     }
 
     public void EnergyGain(float value)
