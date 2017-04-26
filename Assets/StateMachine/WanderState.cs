@@ -17,8 +17,8 @@ public class WanderState : IState
     {
         fm = statePatternGuy;
         guy1 = statePatternGuy.otherGuy1.GetComponent<StatePattern>();
-        //guy2 = statePatternGuy.otherGuy2.GetComponent<StatePattern>();
-        //guy3 = statePatternGuy.otherGuy3.GetComponent<StatePattern>();
+        guy2 = statePatternGuy.otherGuy2.GetComponent<StatePattern>();
+        guy3 = statePatternGuy.otherGuy3.GetComponent<StatePattern>();
     }
 
     public void UpdateState()
@@ -118,6 +118,9 @@ public class WanderState : IState
                 fm.activityToMake.device.used = true;
             }
             i += 1;
+        }
+        if (fm.activityToMake == null) {
+            fm.activityToMake = fm.boringActivity;
         }
     }
 
