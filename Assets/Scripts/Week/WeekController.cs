@@ -19,7 +19,7 @@ public class WeekController : MonoBehaviour {
     public float money;
     public float energy;
 
-
+    public Data data;
 
     List<GameObject> daysTransform = new List<GameObject>();
     List<DailyEvent> daysEvents = new List<DailyEvent>();
@@ -49,7 +49,11 @@ public class WeekController : MonoBehaviour {
         daysTransform.Add(days.GetChild(5).gameObject);
         daysTransform[5].SetActive(false);
 
-
+        data = GameObject.Find("Data").GetComponent<Data>();
+        fm1.moral = data.fm1Moral;
+        fm2.moral = data.fm2Moral;
+        fm3.moral = data.fm3Moral;
+        fm4.moral = data.fm4Moral;
         WriteDailyEvent();
        
     }
@@ -76,6 +80,10 @@ public class WeekController : MonoBehaviour {
         currentDay++;
         if (currentDay >= 6)
         {
+            data.fm1Moral = fm1.moral;
+            data.fm2Moral = fm2.moral;
+            data.fm3Moral = fm3.moral;
+            data.fm4Moral = fm4.moral;
             StartCoroutine(LoadNewScene("Recap"));
         }
         currentEvent = daysEvents[currentDay];

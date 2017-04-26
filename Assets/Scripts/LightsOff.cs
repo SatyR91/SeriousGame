@@ -24,7 +24,6 @@ public class LightsOff : MonoBehaviour {
     void OnTriggerEnter(Collider other) {
         if (other.gameObject.tag == "FamilyMember") {
             numberOfPerson++;
-            Debug.Log("HERE COMES A NEW CHALLENGER : " + numberOfPerson);
             if (!lights[0].enabled) {
                 foreach (Light l in lights) {
                     l.enabled = true;
