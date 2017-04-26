@@ -36,7 +36,7 @@ public class UpgradeButton : MonoBehaviour {
                 DeviceLevel = data.WashingMachineLevel;
                 break;
             case ("Vacuum cleaner"):
-                DeviceLevel = data.DryingMachineLevel;
+                DeviceLevel = data.VacuumCleanerLevel;
                 break;
             case ("Casual Computer"):
                 DeviceLevel = data.CasualComputerLevel;
