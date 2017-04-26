@@ -11,7 +11,7 @@ public class LightController : MonoBehaviour {
 	void Start () {
         //GetComponent<Light>().enabled = false;
         gController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
-        energyConsumption = gController.EnergyConsumption;
+        energyConsumption = 0.06f;
 	}
 	
 	// Update is called once per frame

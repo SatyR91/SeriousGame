@@ -86,14 +86,7 @@ public class GameController : MonoBehaviour {
 
     public void EnergyLoss(float value)
     {
-        if (energy - value >= 0)
-        {
-            energy -= value;
-        }
-        else
-        {
-            // the end
-        }
+        data.LightConsumption += value;
     }
 
     public void EnergyGain(float value)
