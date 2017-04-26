@@ -33,7 +33,7 @@ public class UseState : IState
 
     public void GoUse()
     {
-        if (Vector3.Distance(fm.activityToMake.device.transform.position, fm.transform.position) < 2 )
+        if (Vector3.Distance(fm.activityToMake.device.transform.position, fm.transform.position) < 1 )
         {
             fm.GetComponent<NavMeshAgent>().Stop();
             fm.curTime = fm.time;

@@ -31,16 +31,16 @@ public class RecapManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         data = GameObject.Find("Data").GetComponent<Data>();
-        LightConsumptionNumberText.text = (data.LightConsumption * 10.5f).ToString() + " W";
-        DishwasherConsumptionNumberText.text = (data.DishwasherConsumption * 10.5f).ToString() + " W";
-        StoveConsumptionNumberText.text = (data.StoveConsumption * 10.5f).ToString() + " W";
-        RefrigeratorConsumptionNumberText.text = (data.RefrigeratorConsumption * 10.5f).ToString() + " W";
-        WashingMachineConsumptionNumberText.text = (data.WashingMachineConsumption * 10.5f).ToString() + " W";
-        VacuumCleanerConsumptionNumberText.text = (data.VacuumCleanerConsumption * 10.5f).ToString() + " W";
-        CasualComputerConsumptionNumberText.text = (data.CasualComputerConsumption * 10.5f).ToString() + " W";
-        GamingComputerConsumptionNumberText.text = (data.GamingComputerConsumption * 10.5f).ToString() + " W";
-        TelevisionConsumptionNumberText.text = (data.TelevisionConsumption * 10.5f).ToString() + " W";
-        MiscellanelousConsumptionNumberText.text = data.MiscellanelousConsumption.ToString() + " W";
+        LightConsumptionNumberText.text = (data.LightConsumption * 10.5f).ToString() + " kWh";
+        DishwasherConsumptionNumberText.text = (data.DishwasherConsumption * 10.5f).ToString() + " kWh";
+        StoveConsumptionNumberText.text = (data.StoveConsumption * 10.5f).ToString() + " kWh";
+        RefrigeratorConsumptionNumberText.text = (data.RefrigeratorConsumption * 10.5f).ToString() + " kWh";
+        WashingMachineConsumptionNumberText.text = (data.WashingMachineConsumption * 10.5f).ToString() + " kWh";
+        VacuumCleanerConsumptionNumberText.text = (data.VacuumCleanerConsumption * 10.5f).ToString() + " kWh";
+        CasualComputerConsumptionNumberText.text = (data.CasualComputerConsumption * 10.5f).ToString() + " kWh";
+        GamingComputerConsumptionNumberText.text = (data.GamingComputerConsumption * 10.5f).ToString() + " kWh";
+        TelevisionConsumptionNumberText.text = (data.TelevisionConsumption * 10.5f).ToString() + " kWh";
+        MiscellanelousConsumptionNumberText.text = data.MiscellanelousConsumption.ToString() + " kWh";
 
         PreviousBalanceText.text = "$ " + data.Money.ToString();
         IncomesText.text = "$ " + Income.ToString();
@@ -51,14 +51,14 @@ public class RecapManager : MonoBehaviour {
         WeekText.text = "Week " + data.CurrentWeek.ToString();
         
 
-        float expectedConsumption = data.LightConsumption + data.DishwasherConsumption + data.StoveConsumption +
+        float expectedConsumption = (data.LightConsumption + data.DishwasherConsumption + data.StoveConsumption +
             data.RefrigeratorConsumption + data.WashingMachineConsumption + data.VacuumCleanerConsumption +
             data.CasualComputerConsumption + data.GamingComputerConsumption + data.TelevisionConsumption +
-            data.MiscellanelousConsumption;
-        ExpectedConsumptionNumberText.text = expectedConsumption.ToString() + " W";
+            data.MiscellanelousConsumption) * 10.5f;
+        ExpectedConsumptionNumberText.text = expectedConsumption.ToString() + " kWh";
         float energySaved = expectedConsumption * ((float)data.ConsumptionBoostLevel * 0.02f);
-        EnergySavedNumberText.text = energySaved.ToString() + " W";
-        TotalConsumptionNumberText.text = (expectedConsumption - energySaved).ToString() + " W";
+        EnergySavedNumberText.text = energySaved.ToString() + " kWh";
+        TotalConsumptionNumberText.text = (expectedConsumption - energySaved).ToString() + " kWh";
     }
 	
 	// Update is called once per frame

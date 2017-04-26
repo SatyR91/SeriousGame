@@ -71,6 +71,7 @@ public class Device : MonoBehaviour{
         }
         
         tmpConsumption += timeElapsed * consumptionTick;
+        gC.energyMax -= tmpConsumption;
     }
 
 
