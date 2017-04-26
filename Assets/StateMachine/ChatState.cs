@@ -18,6 +18,10 @@ public class ChatState : IState
         fm.ItsTime();
         if (arrived)
         {
+            if(fm.GetComponent<Animator>().GetBool("isWalking"))
+            {
+                fm.GetComponent<Animator>().SetBool("isWalking", false);
+            }
             Chat();
         }
         else
@@ -35,7 +39,7 @@ public class ChatState : IState
         {
             fm.GetComponent<NavMeshAgent>().Stop();
             fm.curTime = fm.time;
-            arrived = true;
+            arrived = true;      
         }
         else
         {
@@ -49,10 +53,12 @@ public class ChatState : IState
     {
         if (Vector3.Distance(fm.guyToTalkTo.transform.position, fm.transform.position) > 2)
         {
+            fm.GetComponent<Animator>().SetBool("isWalking", true);
             fm.currentState = fm.wanderState;
         }
         if (fm.time >= fm.curTime + fm.chatTime)
         {
+            fm.GetComponent<Animator>().SetBool("isWalking", true);
             fm.currentState = fm.wanderState;
         }
     }
