@@ -12,6 +12,8 @@ public class FamilyMember : MonoBehaviour {
     public Mesh mesh;
     public List<float> envies;
 
+    private float tmpTime;
+
     public void moralLoss (float value)
     {
         if (System.Math.Abs(moral) + System.Math.Abs(value) >= 100)
@@ -27,5 +29,52 @@ public class FamilyMember : MonoBehaviour {
         {
             moral += value;
         }       
+    }
+
+    public void workGain(float value)
+    {
+        if (System.Math.Abs(moral) + System.Math.Abs(value) >= 100)
+        { }
+        else
+        {
+            workValue += value;
+        }
+    }
+
+    public void socialGain(float value)
+    {
+        if (System.Math.Abs(moral) + System.Math.Abs(value) >= 100)
+        { }
+        else
+        {
+            socialValue += value;
+        }
+    }
+
+    public void Update()
+    {
+        StatePattern sp = GetComponentInParent<StatePattern>();
+
+        if (sp.activityToMake != null)
+        {
+            Device device = sp.activityToMake.device;
+            if (device.on) {
+                if (sp.time - tmpTime >= 1)
+                {
+                    moralGain(sp.activityToMake.moralValue / sp.activityToMake.timeOfExec);
+                    socialGain(sp.activityToMake.socialValue / sp.activityToMake.timeOfExec);
+                    workGain(sp.activityToMake.workValue / sp.activityToMake.timeOfExec);
+                    tmpTime = sp.time;
+                }
+            }
+        }
+        else if (sp.currentState == sp.chatState)
+        {
+            if (sp.time - tmpTime >= 1)
+            {
+                socialGain(3f);
+                tmpTime = sp.time;
+            }
+        }
     }
 }
