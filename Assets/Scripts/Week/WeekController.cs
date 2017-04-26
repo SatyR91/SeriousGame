@@ -9,7 +9,17 @@ public class WeekController : MonoBehaviour {
     DailyEvent currentEvent;
     public Transform days;
     DailyEventsController dailyEventsController;
-    
+    public WeekHUDController weekHUDController;
+
+    public FamilyMember fm1;
+    public FamilyMember fm2;
+    public FamilyMember fm3;
+    public FamilyMember fm4;
+
+    public float money;
+    public float energy;
+
+
 
     List<GameObject> daysTransform = new List<GameObject>();
     List<DailyEvent> daysEvents = new List<DailyEvent>();
@@ -38,8 +48,6 @@ public class WeekController : MonoBehaviour {
         daysTransform[4].SetActive(false);
         daysTransform.Add(days.GetChild(5).gameObject);
         daysTransform[5].SetActive(false);
-
-        
 
 
         WriteDailyEvent();
@@ -79,11 +87,24 @@ public class WeekController : MonoBehaviour {
         List<FamilyMember> targets = currentEvent.targets;
         foreach(var target in targets)
         {
-            target.moral += currentEvent.moralVariation;
+            if (target.moral + currentEvent.moralVariation >= 100)
+            {
+                target.moral = 100;
+            }
+            else if (target.moral + currentEvent.moralVariation <= 0)
+            {
+                target.moral = 0;
+            }
+            else
+            {
+                target.moral += currentEvent.moralVariation;
+            }
+            
+            
         }
-        // TODO 
-        // Energy + Money Variation
-
+        money += currentEvent.moneyVariation;
+        energy += currentEvent.energyVariation;
+        weekHUDController.BarsUpdate();
         NextPage();
     }
 
