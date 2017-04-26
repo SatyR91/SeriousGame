@@ -19,7 +19,8 @@ public class DigitalGameTimeClock : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        hour = 17f;
+        hour = 16f;
+        minute = 59f;
         currentTime = hour * 60f + minute;
     }
 
