@@ -32,11 +32,12 @@ public class GameController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         MoralLossTick(moralLossPerTick);
-
+        if (fm1.moral <= 0 && fm2.moral <= 0 && fm3.moral <= 0 && fm4.moral <= 0) SceneManager.LoadSceneAsync("GameOver", LoadSceneMode.Single);
         if (fm3.GetComponent<StatePattern>().currentState == fm3.GetComponent<StatePattern>().sleepState && gameClock.currentTime >= 90)
         {
-            SceneManager.LoadSceneAsync("Week");
+            StartCoroutine(LoadNewScene("Week"));
         }
+        
 	}
 
     /// <summary>
@@ -96,5 +97,13 @@ public class GameController : MonoBehaviour {
         {
             // the end
         }
+    }
+
+    private IEnumerator LoadNewScene(string SceneName)
+    {
+        Fade fader = GameObject.Find("Fader").GetComponent<Fade>();
+        fader.BeginFade(1);
+        yield return new WaitForSeconds(fader.fadeSpeed);
+        SceneManager.LoadSceneAsync(SceneName, LoadSceneMode.Single);
     }
 }
