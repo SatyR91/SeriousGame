@@ -32,10 +32,10 @@ public class RecapManager : MonoBehaviour {
 	void Start () {
         data = GameObject.Find("Data").GetComponent<Data>();
         LightConsumptionNumberText.text = (data.LightConsumption * 10.5f).ToString() + " kWh";
-        DishwasherConsumptionNumberText.text = (data.DishwasherConsumption * 10.5f).ToString() + " kWh";
+        DishwasherConsumptionNumberText.text = (data.DishwasherConsumption).ToString() + " kWh";
         StoveConsumptionNumberText.text = (data.StoveConsumption * 10.5f).ToString() + " kWh";
-        RefrigeratorConsumptionNumberText.text = (data.RefrigeratorConsumption * 10.5f).ToString() + " kWh";
-        WashingMachineConsumptionNumberText.text = (data.WashingMachineConsumption * 10.5f).ToString() + " kWh";
+        RefrigeratorConsumptionNumberText.text = (( 3 - data.RefrigeratorLevel) * 10.5f).ToString() + " kWh";
+        WashingMachineConsumptionNumberText.text = (data.WashingMachineConsumption).ToString() + " kWh";
         VacuumCleanerConsumptionNumberText.text = (data.VacuumCleanerConsumption * 10.5f).ToString() + " kWh";
         CasualComputerConsumptionNumberText.text = (data.CasualComputerConsumption * 10.5f).ToString() + " kWh";
         GamingComputerConsumptionNumberText.text = (data.GamingComputerConsumption * 10.5f).ToString() + " kWh";
@@ -49,8 +49,8 @@ public class RecapManager : MonoBehaviour {
         WeekText.text = "Week " + data.CurrentWeek.ToString();
         
 
-        float expectedConsumption = (data.LightConsumption + data.DishwasherConsumption + data.StoveConsumption +
-            data.RefrigeratorConsumption + data.WashingMachineConsumption + data.VacuumCleanerConsumption +
+        float expectedConsumption = (data.LightConsumption + (data.DishwasherConsumption/10.5f) + data.StoveConsumption +
+            (3 -data.RefrigeratorLevel) + (data.WashingMachineConsumption / 10.5f) + data.VacuumCleanerConsumption +
             data.CasualComputerConsumption + data.GamingComputerConsumption + data.TelevisionConsumption +
             data.MiscellanelousConsumption) * 10.5f;
         ExpectedConsumptionNumberText.text = expectedConsumption.ToString() + " kWh";
