@@ -9,7 +9,7 @@ public class HUDController : MonoBehaviour {
     public Transform globalMoralPanel;
     public Transform globalEnergyPanel;
     public Transform globalMoneyPanel;
-    
+    public Color energyDefaultColor;
     bool barsUpdateTime = true;
     
     public Transform moralPanelFm1;
@@ -97,7 +97,18 @@ public class HUDController : MonoBehaviour {
 
     void currentEnergyUsedUpdate()
     {
-        BarUpdate(globalEnergyPanel, gameController.currentEnergyUsed, gameController.energyMax);
+        Color color;
+        globalEnergyPanel.GetComponentInChildren<Text>().text = gameController.energy.ToString() + " / " + gameController.energyMax.ToString();
+        if (gameController.energy >= gameController.energyMax)
+        {
+            color = Color.red;
+        }
+        else {
+            color = energyDefaultColor;
+        }
+        globalEnergyPanel.GetComponentInChildren<Text>().color = color;
+
+        //BarUpdate(globalEnergyPanel, gameController.currentEnergyUsed, gameController.energyMax);
     }
 
     /// <summary>
