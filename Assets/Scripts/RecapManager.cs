@@ -44,8 +44,6 @@ public class RecapManager : MonoBehaviour {
 
         PreviousBalanceText.text = "$ " + data.Money.ToString();
         IncomesText.text = "$ " + Income.ToString();
-        //EnergyBillText.text = "$ " + TODO;
-        //TotalSavingsText.text = "$ " + TODO;
 
 
         WeekText.text = "Week " + data.CurrentWeek.ToString();
@@ -59,10 +57,14 @@ public class RecapManager : MonoBehaviour {
         float energySaved = expectedConsumption * ((float)data.ConsumptionBoostLevel * 0.02f);
         EnergySavedNumberText.text = energySaved.ToString() + " kWh";
         TotalConsumptionNumberText.text = (expectedConsumption - energySaved).ToString() + " kWh";
+
+        EnergyBillText.text = "$ " + ((expectedConsumption - energySaved) * WattHourUnitPrice).ToString();
+        TotalSavingsText.text = "$ " + ((data.Money - ((expectedConsumption - energySaved) * WattHourUnitPrice)) + Income).ToString();
+        data.Money = (int)Mathf.Round(data.Money - ((expectedConsumption - energySaved) * WattHourUnitPrice)) + Income;
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 }
