@@ -18,6 +18,7 @@ public class GameController : MonoBehaviour {
     public float EnergyConsumption;
 
     public float energyAwareness;
+    public float moralBoost;
 
     public Data data;
 
@@ -56,6 +57,8 @@ public class GameController : MonoBehaviour {
         GamingComputer.level = data.GamingComputerLevel;
         Television.level = data.TelevisionLevel;
         #endregion
+
+        moralBoost = 1 + (data.MoralBoostLevel * 0.03f);
     }
 
     // Update is called once per frame
