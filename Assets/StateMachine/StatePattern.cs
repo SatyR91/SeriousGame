@@ -33,7 +33,7 @@ public class StatePattern : MonoBehaviour
     public bool hasTalked;
     [HideInInspector]
     public float time;
-    [HideInInspector]
+    
     public float curTime;
     [HideInInspector]
     public IState currentState;
@@ -100,22 +100,37 @@ public class StatePattern : MonoBehaviour
     {
         if (time >= sleepTime && time <= sleepTime +1)
         {
+            /*if (currentState == useState && activityToMake.device.on)
+            {
+                activityToMake.device.timeOn += (time - curTime);
+            }*/
             currentState = sleepState;
         }
         if (time >= workTime && time <= workTime +1)
         {
+            /*if (currentState == useState && activityToMake.device.on)
+            {
+                activityToMake.device.timeOn += (time - curTime);
+            }*/
             currentState = outState;
         }
         foreach (Activity a in mandActivities)
         {
             if (time >= a.MandStartTime && time <= a.MandStartTime + 1)
             {
+               /* if (currentState == useState && activityToMake.device.on)
+                {
+                    activityToMake.device.timeOn += (time - curTime);
+                }*/
                 Clear();
+
                 activityToMake = a;
                 currentState = useState;
             }
         }
     }
+
+
 
     public void ChangeActivity()
     {
@@ -125,9 +140,16 @@ public class StatePattern : MonoBehaviour
             {
                 refusedActivity = activityToMake;
             }
+
             timesRefused += 1;
+            
             activityToMake.device.used = false;
-            activityToMake.device.setOn(false);
+            if (activityToMake.device.on)
+            {
+                activityToMake.device.setOn(false);
+                //activityToMake.device.timeOn += (time - curTime);
+            }
+            
             activityToMake = null;
             useState.arrived = false;
             wanderTime = time;

@@ -50,9 +50,9 @@ public class UpgradeValidation : MonoBehaviour {
                         currentdevice.CheckForUpgrade();
                         currentdevice.UpdateFromData();
                         break;
-                    case ("Drying Machine"):
+                    case ("Vacuum Cleaner"):
                         data.Money -= currentdevice.UpgradeCost[currentdevice.DeviceLevel];
-                        data.DryingMachineLevel++;
+                        data.VacuumCleanerLevel++;
                         currentdevice.DeviceLevel++;
                         currentdevice.CheckForUpgrade();
                         currentdevice.UpdateFromData();

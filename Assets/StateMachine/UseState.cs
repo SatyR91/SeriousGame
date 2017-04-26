@@ -36,6 +36,7 @@ public class UseState : IState
             fm.curTime = fm.time;
             fm.activityToMake.device.setOn(true);
             arrived = true;
+            fm.activityToMake.device.tmpConsumption = 0;
         }
         else
         {
@@ -48,6 +49,7 @@ public class UseState : IState
     {
         if (fm.time >= fm.curTime + fm.activityToMake.timeOfExec)
         {
+            //fm.activityToMake.device.timeOn += fm.activityToMake.timeOfExec;
             fm.Clear();
             fm.hasTalked = false;
             fm.ToWanderState();
