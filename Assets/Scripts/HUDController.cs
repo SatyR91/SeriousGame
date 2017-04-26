@@ -119,18 +119,28 @@ public class HUDController : MonoBehaviour {
 
     public void ActivityUpdate(Text activityText, FamilyMember fm)
     {
-        if (fm.GetComponent<StatePattern>().currentState == fm.GetComponent<StatePattern>().wanderState) {
-            activityText.text = "Wondering";
+        if (fm.GetComponent<StatePattern>().currentState == fm.GetComponent<StatePattern>().wanderState)
+        {
+            activityText.text = "Wandering";
         }
-        else if (fm.GetComponent<StatePattern>().currentState == fm.GetComponent<StatePattern>().sleepState) {
+        else if (fm.GetComponent<StatePattern>().currentState == fm.GetComponent<StatePattern>().sleepState)
+        {
             activityText.text = "Sleeping";
         }
         else if (fm.GetComponent<StatePattern>().currentState == fm.GetComponent<StatePattern>().outState)
         {
             activityText.text = "Working";
         }
-        else {
+        else if (fm.GetComponent<StatePattern>().currentState == fm.GetComponent<StatePattern>().chatState)
+        {
+            activityText.text = "Discussing";
+        }
+        else if (fm.GetComponent<StatePattern>().activityToMake != null)
+        {
             activityText.text = fm.GetComponent<StatePattern>().activityToMake.activityName;
+        }
+        else {
+            Debug.Log("No activity");
         }
        
     }

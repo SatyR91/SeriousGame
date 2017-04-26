@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
     public FamilyMember fm1;
@@ -13,21 +14,30 @@ public class GameController : MonoBehaviour {
     public float energyMax = 100;
     public float money;
     public float moneyMax = 100;
-
     public float moralLossPerTick = 0.005f;
     public float EnergyConsumption;
 
     public float energyAwareness;
+
+    public DigitalGameTimeClock gameClock;
     // Use this for initialization
     void Start () {
         currentEnergyUsed = 0;
         energy = 0;
         money = moneyMax;
+        energyAwareness = (float)GameObject.Find("Data").GetComponent<Data>().LightBoostLevel;
+        Debug.Log(energyAwareness);
 	}
 	
 	// Update is called once per frame
 	void Update () {
         MoralLossTick(moralLossPerTick);
+        if (fm1.moral <= 0 && fm2.moral <= 0 && fm3.moral <= 0 && fm4.moral <= 0) SceneManager.LoadSceneAsync("GameOver", LoadSceneMode.Single);
+        if (fm3.GetComponent<StatePattern>().currentState == fm3.GetComponent<StatePattern>().sleepState && gameClock.currentTime >= 90)
+        {
+            StartCoroutine(LoadNewScene("Week"));
+        }
+        
 	}
 
     /// <summary>
@@ -87,5 +97,13 @@ public class GameController : MonoBehaviour {
         {
             // the end
         }
+    }
+
+    private IEnumerator LoadNewScene(string SceneName)
+    {
+        Fade fader = GameObject.Find("Fader").GetComponent<Fade>();
+        fader.BeginFade(1);
+        yield return new WaitForSeconds(fader.fadeSpeed);
+        SceneManager.LoadSceneAsync(SceneName, LoadSceneMode.Single);
     }
 }

@@ -36,13 +36,6 @@ public class UpgradeValidation : MonoBehaviour {
                         currentdevice.CheckForUpgrade();
                         currentdevice.UpdateFromData();
                         break;
-                    case ("Microwave"):
-                        data.Money -= currentdevice.UpgradeCost[currentdevice.DeviceLevel];
-                        data.MicrowaveLevel++;
-                        currentdevice.DeviceLevel++;
-                        currentdevice.CheckForUpgrade();
-                        currentdevice.UpdateFromData();
-                        break;
                     case ("Refrigerator"):
                         data.Money -= currentdevice.UpgradeCost[currentdevice.DeviceLevel];
                         data.RefrigeratorLevel++;
