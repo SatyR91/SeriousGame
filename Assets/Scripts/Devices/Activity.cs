@@ -11,4 +11,7 @@ public class Activity : MonoBehaviour {
     public float socialValue;
     public bool MandatoryActivity;
     public float MandStartTime;
+
 }
+
+

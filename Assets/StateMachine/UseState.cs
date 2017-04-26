@@ -15,7 +15,10 @@ public class UseState : IState
     public void UpdateState()
     {
         fm.Uptime();
-        fm.ItsTime();
+        if (!fm.activityToMake.MandatoryActivity) {
+            fm.ItsTime();
+        }
+        
         if (arrived)
         {
             Use();
