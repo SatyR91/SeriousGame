@@ -9,7 +9,7 @@ public class InviteFriends : DailyEvent {
         id = 0;
         rarity = 1;
         description = "Some family friends are\n coming tonight";
-        moralVariation = 10f;
+        moralVariation = 5f;
         energyVariation = -10f;
         moneyVariation = -30f;
         targets = list;
