@@ -54,6 +54,7 @@ public class WeekController : MonoBehaviour {
         fm2.moral = data.fm2Moral;
         fm3.moral = data.fm3Moral;
         fm4.moral = data.fm4Moral;
+        money = (float)data.Money;
         WriteDailyEvent();
        
     }
@@ -84,6 +85,7 @@ public class WeekController : MonoBehaviour {
             data.fm2Moral = fm2.moral;
             data.fm3Moral = fm3.moral;
             data.fm4Moral = fm4.moral;
+            data.Money = (int)Mathf.Round(money);
             StartCoroutine(LoadNewScene("Recap"));
         }
         currentEvent = daysEvents[currentDay];
