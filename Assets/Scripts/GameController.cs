@@ -19,9 +19,16 @@ public class GameController : MonoBehaviour {
 
     public float energyAwareness;
 
+    private Data data;
+
     public DigitalGameTimeClock gameClock;
     // Use this for initialization
     void Start () {
+        data = GameObject.Find("Data").GetComponent<Data>();
+        fm1.moral = data.fm1Moral;
+        fm2.moral = data.fm2Moral;
+        fm3.moral = data.fm3Moral;
+        fm4.moral = data.fm4Moral;
         currentEnergyUsed = 0;
         energy = 0;
         money = moneyMax;
@@ -35,6 +42,10 @@ public class GameController : MonoBehaviour {
         if (fm1.moral <= 0 && fm2.moral <= 0 && fm3.moral <= 0 && fm4.moral <= 0) SceneManager.LoadSceneAsync("GameOver", LoadSceneMode.Single);
         if (fm3.GetComponent<StatePattern>().currentState == fm3.GetComponent<StatePattern>().sleepState && gameClock.currentTime >= 90)
         {
+            data.fm1Moral = fm1.moral;
+            data.fm2Moral = fm2.moral;
+            data.fm3Moral = fm3.moral;
+            data.fm4Moral = fm4.moral;
             StartCoroutine(LoadNewScene("Week"));
         }
         

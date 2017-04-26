@@ -36,12 +36,11 @@ public class StartButton : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        Time.timeScale = 0;
         dadPattern = dad.GetComponent<StatePattern>();
         momPattern = mom.GetComponent<StatePattern>();
         teenPattern = teen.GetComponent<StatePattern>();
         kidPattern = kid.GetComponent<StatePattern>();
-    
+        StartCoroutine(WaitForEndOfFade());
 
     }
 
@@ -80,4 +79,9 @@ public class StartButton : MonoBehaviour {
         Sliders.SetActive(false);
     }
 
+    IEnumerator WaitForEndOfFade()
+    {
+        yield return new WaitForSeconds(2.5f);
+        Time.timeScale = 0;
+    }
 }
