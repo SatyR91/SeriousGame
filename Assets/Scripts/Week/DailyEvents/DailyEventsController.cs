@@ -17,10 +17,15 @@ public class DailyEventsController : MonoBehaviour {
 
         List<FamilyMember> emptyTargets = new List<FamilyMember>();
         // List of all Events
-        dailyEvents.Add(new ThrowParty(new List<FamilyMember> {}));
+        dailyEvents.Add(new ThrowParty(new List<FamilyMember> { Teen }));
+        dailyEvents.Add(new TeenFriendBirthday(new List<FamilyMember> { Teen }));
         dailyEvents.Add(new GoToCinema(new List<FamilyMember> { Mom, Dad }));
+        dailyEvents.Add(new BossDinner(new List<FamilyMember> { Dad }));
         dailyEvents.Add(new GoToBowling(new List<FamilyMember> { Mom, Dad, Teen, Kid}));
         dailyEvents.Add(new TripToDisneyLand(new List<FamilyMember> { Mom, Dad, Teen, Kid }));
+        dailyEvents.Add(new InviteFriends(new List<FamilyMember> { Mom, Dad, Teen, Kid }));
+        dailyEvents.Add(new InviteSarah(new List<FamilyMember> { Kid }));
+        dailyEvents.Add(new InviteKidFriends(new List<FamilyMember> { Kid }));
 
         // Sort list by rarity
         dailyEvents.Sort(SortByRarity);

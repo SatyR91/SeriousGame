@@ -68,7 +68,7 @@ public class WeekController : MonoBehaviour {
         currentDay++;
         if (currentDay >= 6)
         {
-            SceneManager.LoadSceneAsync("Recap");
+            StartCoroutine(LoadNewScene("Recap"));
         }
         currentEvent = daysEvents[currentDay];
         daysTransform[currentDay].SetActive(true);
@@ -106,5 +106,11 @@ public class WeekController : MonoBehaviour {
             page.FindChild("Next").gameObject.SetActive(true);
         }
     }
-   
+    private IEnumerator LoadNewScene(string SceneName)
+    {
+        Fade fader = GameObject.Find("Fader").GetComponent<Fade>();
+        fader.BeginFade(1);
+        yield return new WaitForSeconds(fader.fadeSpeed);
+        SceneManager.LoadSceneAsync(SceneName, LoadSceneMode.Single);
+    }
 }
