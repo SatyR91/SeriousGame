@@ -12,6 +12,13 @@ public class FamilyMember : MonoBehaviour {
     public Mesh mesh;
     public List<float> envies;
 
+    private GameController gC;
+
+    void Start()
+    {
+        gC = GameObject.Find("GameController").GetComponent<GameController>();
+    }
+
     private float tmpTime;
 
     public void moralLoss (float value)
@@ -61,7 +68,7 @@ public class FamilyMember : MonoBehaviour {
             if (device.on) {
                 if (sp.time - tmpTime >= 1)
                 {
-                    moralGain(sp.activityToMake.moralValue / sp.activityToMake.timeOfExec);
+                    moralGain(sp.activityToMake.moralValue*gC.moralBoost / sp.activityToMake.timeOfExec);
                     socialGain(sp.activityToMake.socialValue / sp.activityToMake.timeOfExec);
                     workGain(sp.activityToMake.workValue / sp.activityToMake.timeOfExec);
                     tmpTime = sp.time;
