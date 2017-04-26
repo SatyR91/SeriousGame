@@ -52,7 +52,7 @@ public class Device : MonoBehaviour{
             light.SetActive(false);
             on = false;
             gC.currentEnergyUsed -= consumption;
-            Debug.Log("seuf : " + name);
+            //Debug.Log("seuf : " + name);
             ConsumptionCalcul();
         }
     }
