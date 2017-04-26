@@ -9,7 +9,7 @@ public class TripToDisneyLand : DailyEvent {
         id = 0;
         rarity = 2;
         description = "All the family goes to Disneyland !";
-        moralVariation = 100f;
+        moralVariation = 30f;
         energyVariation = 10f;
         moneyVariation = -150f;
         targets = list;

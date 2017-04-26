@@ -9,7 +9,7 @@ public class ThrowParty : DailyEvent {
         id = 0;
         rarity = 1;
         description = "Josh wants to invite a few \n friends tonight";
-        moralVariation = 60f;
+        moralVariation = 20f;
         energyVariation = -20f;
         moneyVariation = -50f;
         targets = list;
