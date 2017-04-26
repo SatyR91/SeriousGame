@@ -68,6 +68,7 @@ public class GameController : MonoBehaviour {
             data.fm2Moral = fm2.moral;
             data.fm3Moral = fm3.moral;
             data.fm4Moral = fm4.moral;
+            data.totalSocial = fm1.socialValue + fm2.socialValue + fm3.socialValue + fm4.socialValue;
             stockDevicesConsumption();
             StartCoroutine(LoadNewScene("Week"));
         }

@@ -55,6 +55,8 @@ public class Data : MonoBehaviour {
     public float fm3Moral;
     public float fm4Moral;
 
+    public float totalSocial;
+
     public int CurrentWeek;
 
     private bool AlreadyPresent()
