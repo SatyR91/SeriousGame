@@ -31,12 +31,12 @@ public class RecapManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         data = GameObject.Find("Data").GetComponent<Data>();
-        LightConsumptionNumberText.text = (data.LightConsumption * 10.5f).ToString() + " kWh";
+        LightConsumptionNumberText.text = ((11 - data.LightBoostLevel)).ToString() + " kWh";
         DishwasherConsumptionNumberText.text = (data.DishwasherConsumption).ToString() + " kWh";
         StoveConsumptionNumberText.text = (data.StoveConsumption * 10.5f).ToString() + " kWh";
         RefrigeratorConsumptionNumberText.text = (( 3 - data.RefrigeratorLevel) * 10.5f).ToString() + " kWh";
         WashingMachineConsumptionNumberText.text = (data.WashingMachineConsumption).ToString() + " kWh";
-        VacuumCleanerConsumptionNumberText.text = (data.VacuumCleanerConsumption * 10.5f).ToString() + " kWh";
+        VacuumCleanerConsumptionNumberText.text = ((3 - data.VacuumCleanerLevel) * 5.25f).ToString() + " kWh";
         CasualComputerConsumptionNumberText.text = (data.CasualComputerConsumption * 10.5f).ToString() + " kWh";
         GamingComputerConsumptionNumberText.text = (data.GamingComputerConsumption * 10.5f).ToString() + " kWh";
         TelevisionConsumptionNumberText.text = (data.TelevisionConsumption * 10.5f).ToString() + " kWh";
@@ -49,10 +49,10 @@ public class RecapManager : MonoBehaviour {
         WeekText.text = "Week " + data.CurrentWeek.ToString();
         
 
-        float expectedConsumption = (data.LightConsumption + (data.DishwasherConsumption/10.5f) + data.StoveConsumption +
-            (3 -data.RefrigeratorLevel) + (data.WashingMachineConsumption / 10.5f) + data.VacuumCleanerConsumption +
+        float expectedConsumption = ((11 - data.LightBoostLevel) + (data.DishwasherConsumption/10.5f) + data.StoveConsumption +
+            (3 -data.RefrigeratorLevel) + (data.WashingMachineConsumption / 10.5f) + (3 - data.VacuumCleanerLevel) / 2 +
             data.CasualComputerConsumption + data.GamingComputerConsumption + data.TelevisionConsumption +
-            data.MiscellanelousConsumption) * 10.5f;
+            data.MiscellanelousConsumption/10.5f) * 10.5f;
         ExpectedConsumptionNumberText.text = expectedConsumption.ToString() + " kWh";
         float energySaved = expectedConsumption * ((float)data.ConsumptionBoostLevel * 0.02f);
         EnergySavedNumberText.text = energySaved.ToString() + " kWh";

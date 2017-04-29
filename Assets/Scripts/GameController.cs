@@ -46,6 +46,7 @@ public class GameController : MonoBehaviour {
         energy = 0;
         energyAwareness = (float)GameObject.Find("Data").GetComponent<Data>().LightBoostLevel;
         Debug.Log(energyAwareness);
+        data.CurrentWeek++;
 
         #region Electric devices level initialization
         DishWasher.level = data.DishwasherLevel;
