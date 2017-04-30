@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class StartButton : MonoBehaviour {
+public class StartButton : MonoBehaviour, IPointerEnterHandler
+{
 
     public GameObject Sliders;
 
@@ -23,6 +25,9 @@ public class StartButton : MonoBehaviour {
     public Slider kidWorkSlider;
     public Slider kidMoralSlider;
     public Slider kidSocialSlider;
+
+    public AudioClip hoverSoundFX;
+    public AudioClip clickSoundFX;
 
     [HideInInspector]
     public StatePattern dadPattern;
@@ -49,6 +54,12 @@ public class StartButton : MonoBehaviour {
 		
 	}
 
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        GetComponent<AudioSource>().clip = hoverSoundFX;
+        GetComponent<AudioSource>().Play();
+    }
+
     public void OnClick() {
         StartCoroutine(StartGame());
     }
@@ -73,7 +84,8 @@ public class StartButton : MonoBehaviour {
         kidPattern.SortPreferences();
 
         Time.timeScale = 1;
-
+        GetComponent<AudioSource>().clip = clickSoundFX;
+        GetComponent<AudioSource>().Play();
         yield return new WaitForSeconds(0.5f);
 
         Sliders.SetActive(false);
@@ -81,6 +93,8 @@ public class StartButton : MonoBehaviour {
 
     IEnumerator WaitForEndOfFade()
     {
+
+        
         yield return new WaitForSeconds(2.5f);
         Time.timeScale = 0;
     }

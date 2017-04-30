@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class clickOnFM : MonoBehaviour
 {
-    public Canvas CancelActivityUI;
-    public Transform ExclamationSprite;
+
+    public AudioClip successChangeActivitySoundFX;
+
 
     void Update()
     {
@@ -20,6 +21,8 @@ public class clickOnFM : MonoBehaviour
                     GameObject fmHit = hit.collider.gameObject;
                     SendCancelMessage(fmHit);
                     fmHit.GetComponentInChildren<ParticleSystem>().Play();
+                    GetComponent<AudioSource>().clip = successChangeActivitySoundFX;
+                    GetComponent<AudioSource>().Play();
                 }
             }
         }
