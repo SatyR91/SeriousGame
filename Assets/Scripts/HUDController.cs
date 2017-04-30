@@ -98,7 +98,7 @@ public class HUDController : MonoBehaviour {
     void currentEnergyUsedUpdate()
     {
         Color color;
-        globalEnergyPanel.GetComponentInChildren<Text>().text = gameController.energy.ToString() + " / " + gameController.energyMax.ToString();
+        globalEnergyPanel.GetComponentInChildren<Text>().text = (Mathf.FloorToInt(gameController.energy)).ToString() + " / " + gameController.energyMax.ToString();
         if (gameController.energy >= gameController.energyMax)
         {
             color = Color.red;

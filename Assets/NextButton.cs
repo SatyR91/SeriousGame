@@ -20,6 +20,7 @@ public class NextButton : MonoBehaviour {
     public void OnClick() {
         if (tutorialIndex < Tutorial.Length-1)
         {
+            GetComponent<AudioSource>().Play();
             Tutorial[tutorialIndex].SetActive(false);
             tutorialIndex++;
             Tutorial[tutorialIndex].SetActive(true);

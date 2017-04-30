@@ -78,6 +78,7 @@ public class WeekController : MonoBehaviour {
     void NextPage()
     {
         daysTransform[currentDay].GetComponent<PageRotation>().enabled = true;
+        GetComponent<AudioSource>().Play();
         currentDay++;
         if (currentDay >= 6)
         {

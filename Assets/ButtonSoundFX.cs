@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
 
-public class BackToMenu : MonoBehaviour, IPointerEnterHandler
+public class ButtonSoundFX : MonoBehaviour, IPointerEnterHandler
 {
     public AudioClip hoverSoundFX;
     public AudioClip clickSoundFX;
@@ -19,8 +18,10 @@ public class BackToMenu : MonoBehaviour, IPointerEnterHandler
 		
 	}
 
-    public void OnClick() {
-        StartCoroutine(PlaySoundBeforeLoadScene());
+    public void OnClick()
+    {
+        GetComponent<AudioSource>().clip = clickSoundFX;
+        GetComponent<AudioSource>().Play();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -28,14 +29,7 @@ public class BackToMenu : MonoBehaviour, IPointerEnterHandler
         GetComponent<AudioSource>().clip = hoverSoundFX;
         GetComponent<AudioSource>().Play();
     }
+    
 
-    IEnumerator PlaySoundBeforeLoadScene()
-    {
-        GetComponent<AudioSource>().clip = clickSoundFX;
-        GetComponent<AudioSource>().Play();
-        yield return new WaitForSeconds(0.1f);
-       
-        SceneManager.LoadScene("Main Menu");
-      
-    }
+    
 }

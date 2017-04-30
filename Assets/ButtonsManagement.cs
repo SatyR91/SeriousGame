@@ -16,14 +16,21 @@ public class ButtonsManagement : MonoBehaviour {
 	}
 
     public void OnClick(string sceneName) {
+
+        StartCoroutine(PlaySoundBeforeLoadScene(sceneName));
+    }
+
+    IEnumerator PlaySoundBeforeLoadScene(string sceneName) {
+        GetComponent<AudioSource>().Play();
+        yield return new WaitForSeconds(0.1f);
         if (sceneName == "Quit")
         {
             Application.Quit();
         }
-        else {
+        else
+        {
             SceneManager.LoadScene(sceneName);
         }
-
-    }
+    } 
 
 }

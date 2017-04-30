@@ -14,6 +14,7 @@ public class UpgradeValidation : MonoBehaviour {
     }
     public void OnClick()
     {
+        GetComponent<AudioSource>().Play();
         foreach (Transform child in Necessities.transform)
         {
             UpgradeButton currentdevice = child.gameObject.GetComponent<UpgradeButton>();
