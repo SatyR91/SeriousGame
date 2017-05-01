@@ -46,6 +46,7 @@ public class GameController : MonoBehaviour {
         energy = 0;
         energyAwareness = (float)GameObject.Find("Data").GetComponent<Data>().LightBoostLevel;
         Debug.Log(energyAwareness);
+        data.CurrentWeek++;
 
         #region Electric devices level initialization
         DishWasher.level = data.DishwasherLevel;
@@ -146,12 +147,12 @@ public class GameController : MonoBehaviour {
                 return WashingMachine.tmpConsumption;
             case ("Television"):
                 return Television.tmpConsumption;
-            case ("Dish Washer"):
+            case ("Dishwasher"):
                 return DishWasher.tmpConsumption;
             case ("Casual Computer"):
                 return CasualComputer.tmpConsumption;
             case ("Gaming Computer"):
-                return WashingMachine.tmpConsumption;
+                return GamingComputer.tmpConsumption;
             case ("Vacuum Cleaner"):
                 return VacuumCleaner.tmpConsumption;
             case ("Refrigerator"):
@@ -165,7 +166,7 @@ public class GameController : MonoBehaviour {
 
     public void stockDevicesConsumption()
     {
-        data.DishwasherConsumption = RetrieveDeviceConsumption("Dish Washer");
+        data.DishwasherConsumption = RetrieveDeviceConsumption("Dishwasher");
         data.WashingMachineConsumption = RetrieveDeviceConsumption("Washing Machine");
         data.CasualComputerConsumption = RetrieveDeviceConsumption("Casual Computer");
         data.GamingComputerConsumption = RetrieveDeviceConsumption("Gaming Computer");

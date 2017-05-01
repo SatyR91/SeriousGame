@@ -23,10 +23,18 @@ public class SleepState : IState
         }
         if (arrived)
         {
+            if (fm.GetComponent<Animator>().GetBool("isWalking"))
+            {
+                fm.GetComponent<Animator>().SetBool("isWalking", false);
+            }
             Sleep();
         }
         else
         {
+            if (!fm.GetComponent<Animator>().GetBool("isWalking"))
+            {
+                fm.GetComponent<Animator>().SetBool("isWalking", true);
+            }
             GoSleep();
         }
     }
@@ -50,6 +58,6 @@ public class SleepState : IState
 
     public void Sleep()
     {
-
+        
     }
 }

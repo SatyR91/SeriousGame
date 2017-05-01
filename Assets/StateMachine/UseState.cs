@@ -21,10 +21,18 @@ public class UseState : IState
         
         if (arrived)
         {
+            if (fm.GetComponent<Animator>().GetBool("isWalking"))
+            {
+                fm.GetComponent<Animator>().SetBool("isWalking", false);
+            }
             Use();
         }
         else
         {
+            if (!fm.GetComponent<Animator>().GetBool("isWalking"))
+            {
+                fm.GetComponent<Animator>().SetBool("isWalking", true);
+            }
             GoUse();
         }
     }
@@ -33,6 +41,7 @@ public class UseState : IState
 
     public void GoUse()
     {
+        
         if (Vector3.Distance(fm.activityToMake.device.transform.position, fm.transform.position) < 1 )
         {
             fm.GetComponent<NavMeshAgent>().Stop();
@@ -40,6 +49,7 @@ public class UseState : IState
             fm.activityToMake.device.setOn(true);
             arrived = true;
             fm.activityToMake.device.tmpConsumption = 0;
+            
         }
         else
         {
@@ -52,9 +62,9 @@ public class UseState : IState
     {
         if (fm.time >= fm.curTime + fm.activityToMake.timeOfExec)
         {
-            //fm.activityToMake.device.timeOn += fm.activityToMake.timeOfExec;
             fm.Clear();
             fm.hasTalked = false;
+            fm.GetComponent<Animator>().SetBool("isWalking", true);
             fm.ToWanderState();
         }
     }

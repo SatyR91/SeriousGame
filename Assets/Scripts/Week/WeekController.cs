@@ -54,6 +54,7 @@ public class WeekController : MonoBehaviour {
         fm2.moral = data.fm2Moral;
         fm3.moral = data.fm3Moral;
         fm4.moral = data.fm4Moral;
+        money = (float)data.Money;
         WriteDailyEvent();
        
     }
@@ -77,6 +78,7 @@ public class WeekController : MonoBehaviour {
     void NextPage()
     {
         daysTransform[currentDay].GetComponent<PageRotation>().enabled = true;
+        GetComponent<AudioSource>().Play();
         currentDay++;
         if (currentDay >= 6)
         {
@@ -84,6 +86,8 @@ public class WeekController : MonoBehaviour {
             data.fm2Moral = fm2.moral;
             data.fm3Moral = fm3.moral;
             data.fm4Moral = fm4.moral;
+            data.Money = (int)Mathf.Round(money);
+            data.MiscellanelousConsumption = Mathf.Abs(energy) + 15.0f;
             StartCoroutine(LoadNewScene("Recap"));
         }
         currentEvent = daysEvents[currentDay];

@@ -37,10 +37,12 @@ public class WeekHUDController : MonoBehaviour {
         fm2.moral = data.fm2Moral;
         fm3.moral = data.fm3Moral;
         fm4.moral = data.fm4Moral;
+        int money = data.Money;
         surnameFm1.GetComponent<Text>().text = fm1.surname;
         surnameFm2.GetComponent<Text>().text = fm2.surname;
         surnameFm3.GetComponent<Text>().text = fm3.surname;
         surnameFm4.GetComponent<Text>().text = fm4.surname;
+        gameController.money = money;
         BarsUpdate();
     }
 	

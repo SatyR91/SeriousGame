@@ -19,6 +19,7 @@ public class LightController : MonoBehaviour {
 		if (GetComponent<Light>().enabled == true)
         {
             gController.EnergyLoss(energyConsumption);
+            gController.data.LightConsumption += energyConsumption;
         }
 	}
 }
